@@ -24,6 +24,7 @@ If found: remove it and don't commit until it's gone. A secret already committed
 - **Prefer additive, reversible operations.** New commits over history edits; `--force-with-lease` over `--force` when a force is genuinely required and cleared.
 - **Destructive commands are escalations**, not defaults: `push --force`, `reset --hard`, `clean -fd`, branch/tag deletion, `filter-branch`/`filter-repo`.
 - **Confirm working state before switching or resetting** — don't discard uncommitted work.
+- **Commit only what belongs to this change.** Check `git status` first and stage by explicit path. Use `git add -A` / `git add .` only after confirming the whole working tree is part of this one change — never as a reflex, since it sweeps in unrelated edits, local config, secrets, or debug files.
 
 ## Correct routing
 
