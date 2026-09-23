@@ -20,6 +20,7 @@ skills/
 ├── review/                  Code-review judgment lens → correctness/quality findings + verdict.
 ├── security-review/         Application-security lens → vulnerability findings + severity + remediation.
 ├── verify/                  Runtime-observation lens → run the change, observe, report with evidence.
+├── git-safety/              Operational git safety → secret hygiene, safe operations, correct routing.
 └── toon/                    TOON syntax reference (cold-loaded) for the AGENTS.md TOON directive.
 ```
 
