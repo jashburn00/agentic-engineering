@@ -16,7 +16,8 @@ AGENTS.md                    Agent-agnostic system prompt (the entrypoint every 
 skills/
 ├── engineering-standards/   The code-quality constitution (Gate A + Gate B).
 ├── triage/                  Reversibility/blast-radius classifier → autonomy lane + rigor tier.
-└── validate/                Standalone validation pipeline → findings + pass/blocked verdict.
+├── validate/                Standalone validation pipeline → findings + pass/blocked verdict.
+└── review/                  Code-review judgment lens → correctness/quality findings + verdict.
 ```
 
 `AGENTS.md` follows the cross-agent convention, so the system prompt is not tied to any one tool. The constitution is plain markdown: Claude Code loads it as a skill (progressive disclosure); any other agent can read the file directly.
