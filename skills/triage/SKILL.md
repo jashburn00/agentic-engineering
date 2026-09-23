@@ -28,10 +28,9 @@ When unsure which lane applies, escalate.
 
 Present the decision crisply: what is being decided, the viable options, your recommendation with reasoning, and the risk or cost. For design-level decisions, interview to resolve each open branch (in Claude, the `grill-me` skill). Batch related decisions into one ask rather than interrupting repeatedly.
 
-## Set the rigor tier (feeds engineering-standards Gate B)
+## Set the rigor tier (how much of the `validate` pipeline to run)
 
-- **Minimal** — reversible + local: format, lint/vet, a targeted test.
-- **Standard** — moderate reach or multiple callers: full local gate plus tests on happy and failure paths.
-- **Full** — wide blast radius or irreversible: complete pipeline (format → lint/vet → compile/type-check → tests → review) with evidence.
+- **Minimal** — reversible + local (typo, comment, one-line internal fix): format, lint/vet, and a targeted test.
+- **Standard / Full** — anything wider-reaching or irreversible: run the complete `validate` pipeline with evidence, producing well-tested and documented code. Prefer this by default — agents are fast, so thorough testing and documentation cost little. Full applies the most scrutiny (extra review, adversarial edge cases) but never less than the complete pipeline.
 
-Rigor scales with blast radius and never drops below the tier the change warrants.
+Rigor scales with blast radius and never drops below the tier the change warrants; when unsure, prefer the complete pipeline.

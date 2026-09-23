@@ -11,12 +11,14 @@ This skill does not decide *whether* a change deserves validation or *how much* 
 
 ## Pipeline
 
-Run in order; do not proceed past a failing gate until it is green or its finding is recorded.
+Run the gates in order. When a gate fails it raises a finding:
+- a **blocker** stops the pipeline until it is resolved — fix a mechanical blocker and re-run; halt a judgment blocker for the caller;
+- a **warning** is recorded and the pipeline continues.
 
 1. **Format** — apply the language's canonical formatter.
 2. **Lint / vet** — run the project's linters and static analysis.
 3. **Build / type-check** — compile or type-check; it must succeed.
-4. **Test** — run the suite; add missing tests for changed behavior, covering happy and failure paths; all green.
+4. **Test** — run the existing suite; all green. Changed behavior that lacks coverage (happy or failure paths) is a finding — validate checks coverage; development writes the tests, not this step.
 5. **Review** — read the diff for correctness, clarity, and edge cases, against the `engineering-standards` constitution when present.
 
 ## Findings
@@ -32,14 +34,14 @@ Every failure or concern becomes a finding with these fields:
 
 Handle by kind:
 
-- **mechanical** → apply the fix, re-run the affected gate, record it resolved.
+- **mechanical** → apply the fix, then re-run the affected gate and any later gate the change could affect (in practice, from that gate onward); record it resolved.
 - **judgment** → do not guess. Record it with options and leave it for the caller.
 
 ## Verdict
 
 Report one verdict plus the findings record:
 
-- **pass** — every gate green, no unresolved findings. Include evidence: the commands run and their results.
-- **blocked** — any red gate or unresolved judgment finding. List them.
+- **pass** — no unresolved blockers (warnings may remain, and are listed). Include evidence: the commands run and their results.
+- **blocked** — any unresolved blocker: a red gate or a judgment finding awaiting a human. List them.
 
 Never report pass on a red gate or an unverified claim. Report evidence a reviewer can trust without re-running it.
