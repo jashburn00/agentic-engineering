@@ -1,6 +1,6 @@
 ---
 name: engineering-standards
-description: The code-quality constitution for all software work — load before writing, editing, or reviewing code in any language. Two co-equal gates: Gate A (simplicity/readability) and Gate B (validation/testing). Use whenever producing or reviewing code.
+description: The code-quality constitution — load whenever designing, implementing, changing, or reviewing code in any language, and when unsure whether a coding task qualifies. Two co-equal gates: Gate A (simplicity/readability) and Gate B (validation/testing). A pure question about existing or hypothetical code may not need it.
 ---
 
 # Engineering Standards
