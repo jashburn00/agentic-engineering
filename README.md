@@ -18,6 +18,7 @@ skills/
 ├── triage/                  Reversibility/blast-radius classifier → autonomy lane + rigor tier.
 ├── validate/                Standalone validation pipeline → findings + pass/blocked verdict.
 ├── review/                  Code-review judgment lens → correctness/quality findings + verdict.
+├── verify/                  Runtime-observation lens → run the change, observe, report with evidence.
 └── toon/                    TOON syntax reference (cold-loaded) for the AGENTS.md TOON directive.
 ```
 
