@@ -15,7 +15,8 @@ A suite of AI skills for agentic software engineering — a repeatable, high-qua
 AGENTS.md                    Agent-agnostic system prompt (the entrypoint every agent reads).
 skills/
 ├── engineering-standards/   The code-quality constitution (Gate A + Gate B).
-└── triage/                  Reversibility/blast-radius classifier → autonomy lane + rigor tier.
+├── triage/                  Reversibility/blast-radius classifier → autonomy lane + rigor tier.
+└── validate/                Standalone validation pipeline → findings + pass/blocked verdict.
 ```
 
 `AGENTS.md` follows the cross-agent convention, so the system prompt is not tied to any one tool. The constitution is plain markdown: Claude Code loads it as a skill (progressive disclosure); any other agent can read the file directly.
