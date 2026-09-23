@@ -15,6 +15,7 @@ A suite of AI skills for agentic software engineering — a repeatable, high-qua
 AGENTS.md                    Agent-agnostic system prompt (the entrypoint every agent reads).
 skills/
 ├── engineering-standards/   The code-quality constitution (Gate A + Gate B).
+├── workflow/                Conductor → sequences the skills below into one tier-proportional pipeline.
 ├── triage/                  Reversibility/blast-radius classifier → autonomy lane + rigor tier.
 ├── validate/                Standalone validation pipeline → findings + pass/blocked verdict.
 ├── review/                  Code-review judgment lens → correctness/quality findings + verdict.

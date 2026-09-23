@@ -1,0 +1,40 @@
+---
+name: workflow
+description: The end-to-end process for taking a coding task from request to a landed PR — triage, define done, plan, implement, validate, review, and land, scaled to the task's stakes. Use at the start of any non-trivial coding task; it sequences the other skills rather than replacing them.
+---
+
+# Workflow
+
+The repeatable process for a coding task: request in → PR + evidence out. It routes — each step invokes a dedicated skill; this skill decides *what* runs and *how much*, scaled to the task's stakes. It does not restate what those skills do.
+
+Process is proportional to stakes: a Minimal task takes a light path; a Full task runs everything. Never spend more process than the change warrants, or less.
+
+## Steps
+
+1. **Triage** — classify with `triage`: the lane (autonomous vs escalate) and the rigor tier (Minimal / Standard / Full). Everything below scales to this.
+
+2. **Define done** — before implementing, state the task's acceptance criteria: which tests, checks, and observed behaviors must pass (`engineering-standards` Gate B rule 1 — define done, don't guess it). For escalated tasks this lives in the plan; otherwise state it briefly up front.
+
+3. **Plan** — *only when triage escalates.* Write a plan to `docs/plans/<task-slug>.md`, resolve open decisions with the human (`grill-me`), and get sign-off before coding. Non-escalated tasks skip this step and proceed.
+
+4. **Implement** — make the change under `engineering-standards`. Small, coherent diffs; write the tests for changed behavior here (Gate B); follow the plan when one exists.
+
+5. **Validate** — run `validate` at the tier from step 1. Apply mechanical fixes; escalate judgment findings. `validate`'s review gate is the `review` skill — do not run `review` again separately.
+
+6. **Conditional lenses** — invoke based on the change, not by default:
+   - `security-review` when it touches a security surface (input, auth, data, secrets, external calls, new dependencies).
+   - `verify` when there is runtime behavior worth observing (a fix, a feature, UI, integration).
+
+7. **Land** — with `git-safety`: commit (repo conventions and any authorship rules), push a feature branch, and open a PR whose body carries the summary and evidence (validation results, findings, what was verified). Opening a PR is the normal reversible landing, not an escalation. Then, by tier:
+   - **Minimal** — PR opened autonomously; report "done, PR #N."
+   - **Standard** — PR with summary; await the merge decision.
+   - **Full / escalated** — request review before merge, surfacing the key decisions and risks.
+   Merge is the gated act — leave it to the human or parent agent unless the project has opted into auto-merge for green Minimal PRs. On merge, move any plan to `docs/plans/completed/`.
+
+## When blocked
+
+If `validate` returns blocked or a lens finds a blocker, loop back to Implement, fix, and re-validate. If it cannot be resolved with reasonable effort, or a judgment call needs the human, escalate — do not force a pass.
+
+## Done
+
+A task is done when the acceptance criteria from step 2 are met: the tier's validation passed with no unresolved blockers, the required lenses are clear, escalations are resolved, and a PR is open with evidence. Never report done on a red gate, an unmet criterion, or an unverified claim.
