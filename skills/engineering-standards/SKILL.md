@@ -27,7 +27,7 @@ Code is read by developers of any level and must pass human review. A junior sho
 
 1. **Define "done" before starting; refuse to guess it.** State up front what validation this task requires — which tests, checks, and observed behaviors must pass.
 2. **Scale rigor to blast radius.** Reversible, local change → minimal checks. Irreversible, architectural, or security-touching → full pipeline. Same axis as the escalation triage.
-3. **Prefer durable automated tests as the default, where sensible.** Writing them is cheap for agents and pays back as regression safety and cheaper future verification — reach for a one-off manual check only when an automated test genuinely doesn't fit (throwaway spike, pure config).
+3. **Prefer durable automated tests as the default, where sensible.** Writing them is cheap for agents and pays back as regression safety and cheaper future verification — reach for a one-off manual check only when an automated test genuinely doesn't fit (throwaway spike, pure config). If the project has no test infrastructure, don't add it for a small change — note the coverage gap and rely on `verify`. Suggest standing up test infrastructure at most once, and not when the project's context marks automated tests as intentionally omitted; honor that and simply note the gap.
 4. **Test the failure paths, not just the happy path.** Cover edge cases and the error handling from Gate A rule 7. A feature untested for how it fails is not validated.
 5. **Run gates in order; a red gate stops progress.** Format → lint/vet → compile/type-check → tests → review. Do not proceed past a failing gate.
 6. **Observe, don't assume.** Confirm the change works by running it, not by reasoning that it should. Success requires observed evidence.

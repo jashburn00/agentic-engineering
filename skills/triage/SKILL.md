@@ -30,7 +30,8 @@ Present the decision crisply: what is being decided, the viable options, your re
 
 ## Set the rigor tier (how much of the `validate` pipeline to run)
 
+Two tiers:
 - **Minimal** — reversible + local (typo, comment, one-line internal fix): format, lint/vet, and a targeted test.
-- **Standard / Full** — anything wider-reaching or irreversible: run the complete `validate` pipeline with evidence, producing well-tested and documented code. Prefer this by default — agents are fast, so thorough testing and documentation cost little. Full applies the most scrutiny (extra review, adversarial edge cases) but never less than the complete pipeline.
+- **Complete** — anything wider-reaching or irreversible: run the complete `validate` pipeline with evidence, producing well-tested and documented code. This is the default — agents are fast, so thorough testing and documentation cost little. For the highest-stakes changes, add extra scrutiny (adversarial edge cases, a second review pass) on top of the complete pipeline.
 
-Rigor scales with blast radius and never drops below the tier the change warrants; when unsure, prefer the complete pipeline.
+Rigor scales with blast radius and never drops below the tier the change warrants; when unsure, choose Complete.

@@ -28,7 +28,7 @@ If found: remove it and don't commit until it's gone. A secret already committed
 ## Correct routing
 
 - **Push to the intended remote and branch.** Verify `remote -v` and the target before pushing; don't assume `origin`/`main`.
-- **Respect the branch model** — a feature branch, not a direct push to the default/protected branch, unless explicitly told.
+- **Respect the branch model** — branch off the project's documented working branch (check the project's `AGENTS.md` or git config); when undocumented, use a feature branch off the default. Never push directly to the default/protected branch unless explicitly told.
 - **Match fork vs upstream** — push to your fork, open PRs against upstream; never push to a repo you don't own.
 
 ## Before you push — quick checklist

@@ -11,9 +11,11 @@ This skill does not decide *whether* a change deserves validation or *how much* 
 
 ## Pipeline
 
-Run the gates in order. When a gate fails it raises a finding:
-- a **blocker** stops the pipeline until it is resolved — fix a mechanical blocker and re-run; halt a judgment blocker for the caller;
-- a **warning** is recorded and the pipeline continues.
+Run the gates in order. Each gate ends in one of these outcomes:
+- **pass** — the gate ran and is green.
+- **finding** — the gate ran and raised an issue: a **blocker** stops the pipeline until it is resolved (fix a mechanical blocker and re-run; halt a judgment blocker for the caller); a **warning** is recorded and the pipeline continues.
+- **not-applicable** — the tool or config doesn't exist for this project (e.g. no formatter, no test suite). Record it and continue.
+- **could-not-run** — the tool exists but is unavailable here (denied, missing, no environment). Do not treat as pass; record it and continue.
 
 1. **Format** — apply the language's canonical formatter.
 2. **Lint / vet** — run the project's linters and static analysis.
@@ -41,7 +43,7 @@ Handle by kind:
 
 Report one verdict plus the findings record:
 
-- **pass** — no unresolved blockers (warnings may remain, and are listed). Include evidence: the commands run and their results.
+- **pass** — every applicable gate green, no unresolved blockers (warnings may remain, and are listed). List any not-applicable or could-not-run gates so the pass is honest about what wasn't checked. Include evidence: the commands run and their results.
 - **blocked** — any unresolved blocker: a red gate or a judgment finding awaiting a human. List them.
 
 Never report pass on a red gate or an unverified claim. Report evidence a reviewer can trust without re-running it.

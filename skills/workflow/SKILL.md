@@ -11,7 +11,7 @@ Process is proportional to stakes: a Minimal task takes a light path; a Full tas
 
 ## Steps
 
-1. **Triage** — classify with `triage`: the lane (autonomous vs escalate) and the rigor tier (Minimal / Standard / Full). Everything below scales to this.
+1. **Triage** — classify with `triage`: the lane (autonomous vs escalate) and the rigor tier (Minimal or Complete). Everything below scales to this.
 
 2. **Define done** — before implementing, state the task's acceptance criteria: which tests, checks, and observed behaviors must pass (`engineering-standards` Gate B rule 1 — define done, don't guess it). For escalated tasks this lives in the plan; otherwise state it briefly up front.
 
@@ -25,16 +25,18 @@ Process is proportional to stakes: a Minimal task takes a light path; a Full tas
    - `security-review` when it touches a security surface (input, auth, data, secrets, external calls, new dependencies).
    - `verify` when there is runtime behavior worth observing (a fix, a feature, UI, integration).
 
-7. **Land** — with `git-safety`: commit (repo conventions and any authorship rules), push a feature branch, and open a PR whose body carries the summary and evidence (validation results, findings, what was verified). Opening a PR is the normal reversible landing, not an escalation. Then, by tier:
+7. **Land** — with `git-safety`: commit (repo conventions and any authorship rules), push a feature branch, and open a PR whose body carries the summary and evidence (validation results, findings, what was verified). Opening a PR is the normal reversible landing, not an escalation. Then, by tier and lane:
    - **Minimal** — PR opened autonomously; report "done, PR #N."
-   - **Standard** — PR with summary; await the merge decision.
-   - **Full / escalated** — request review before merge, surfacing the key decisions and risks.
+   - **Complete, autonomous** — PR with summary; await the merge decision.
+   - **Escalated** — request review before merge, surfacing the key decisions and risks.
    Merge is the gated act — leave it to the human or parent agent unless the project has opted into auto-merge for green Minimal PRs. On merge, move any plan to `docs/plans/completed/`.
 
 ## When blocked
 
 If `validate` returns blocked or a lens finds a blocker, loop back to Implement, fix, and re-validate. If it cannot be resolved with reasonable effort, or a judgment call needs the human, escalate — do not force a pass.
 
+If part of the pipeline could not run (a tool or permission is unavailable — build, tests, `verify`, or opening a PR), do not report done and do not fabricate results: complete every step you can, then report exactly what passed, what could not run and why, and escalate the blocked part.
+
 ## Done
 
-A task is done when the acceptance criteria from step 2 are met: the tier's validation passed with no unresolved blockers, the required lenses are clear, escalations are resolved, and a PR is open with evidence. Never report done on a red gate, an unmet criterion, or an unverified claim.
+A task is done when the acceptance criteria from step 2 are met: the tier's validation passed with no unresolved blockers, the required lenses are clear, escalations are resolved, and a PR is open with evidence. Never report done on a red gate, a gate that could not run, an unmet criterion, or an unverified claim.
