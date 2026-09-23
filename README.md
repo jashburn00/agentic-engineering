@@ -12,18 +12,26 @@ A suite of AI skills for agentic software engineering — a repeatable, high-qua
 ## Layout
 
 ```
+AGENTS.md                    Agent-agnostic system prompt (the entrypoint every agent reads).
 skills/
 └── engineering-standards/   The code-quality constitution (Gate A + Gate B).
 ```
+
+`AGENTS.md` follows the cross-agent convention, so the system prompt is not tied to any one tool. The constitution is plain markdown: Claude Code loads it as a skill (progressive disclosure); any other agent can read the file directly.
 
 More skills (triage, plan, implement, land, per-stack styles) land here next.
 
 ## Installation
 
-The repo is the source of truth. Activate a skill by symlinking it into `~/.claude/skills/`:
+The repo is the source of truth. Point each agent's instruction entrypoint at `AGENTS.md`, and activate skills into the agent's skill directory.
+
+**Claude Code:**
 
 ```sh
+ln -s "$PWD/AGENTS.md" ~/.claude/CLAUDE.md
 ln -s "$PWD/skills/engineering-standards" ~/.claude/skills/engineering-standards
 ```
 
-Clone this repo and repeat the symlink on any machine to carry the workflow with you.
+**Other agents:** either symlink that agent's instruction file to `AGENTS.md`, or rely on the agent's native `AGENTS.md` discovery.
+
+Clone this repo and repeat the links on any machine to carry the workflow with you.
