@@ -19,7 +19,11 @@ Verify is runtime observation — it complements the automated tests `validate` 
 
 ## Visible UI changes
 
-Render and observe the page with a browser-automation tool unless the human has explicitly denied it — the project's own tool if it has one (Playwright, Puppeteer, Cypress, …); otherwise prefer Playwright. Capture a screenshot to judge the layout, and run programmatic checks for overflow, clipping, and off-screen elements. A screenshot plus passing layout checks is the evidence.
+Render and observe the page with a browser-automation tool unless the human has explicitly denied it — the project's own tool if it has one (Playwright, Puppeteer, Cypress, …); otherwise prefer Playwright.
+
+- **Reproduce the real condition** — the actual state that matters (a loading/error state, the reported bug), not a convenient approximation.
+- **Sweep the size range, don't spot-check** — a continuous range of viewport sizes and orientations (mobile, portrait/landscape, laptop/desktop), including the smallest realistic and browser-chrome-reduced heights. Assert no overflow, clipping, or off-screen content at every step, not at one or two cherry-picked sizes.
+- **Surface the evidence** — capture before/after screenshots, save them to a stable path, and hand them to the human in the review (and the PR where practical), not buried in a gitignored folder. Screenshots across the range plus passing layout checks are the evidence.
 
 ## Report
 
