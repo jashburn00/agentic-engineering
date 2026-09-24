@@ -31,15 +31,25 @@ More skills (plan, implement, land, per-stack styles) land here next.
 
 ## Installation
 
-The repo is the source of truth. Point each agent's instruction entrypoint at `AGENTS.md`, and activate skills into the agent's skill directory.
+The repo is the source of truth. Installing it means symlinking two things into your **user-level** `~/.claude/` — the global system prompt and every skill — so they are active in **every** session on the machine, in any directory. You never launch work from inside this repo; the toolbox travels to each project you open.
 
 **Claude Code:**
 
 ```sh
-ln -s "$PWD/AGENTS.md" ~/.claude/CLAUDE.md
-ln -s "$PWD/skills/engineering-standards" ~/.claude/skills/engineering-standards
+# 1. Global system prompt. Claude Code auto-loads ~/.claude/CLAUDE.md in every
+#    session; symlinking it to AGENTS.md makes the agent-agnostic system prompt
+#    active machine-wide. (Non-Claude agents read AGENTS.md directly.)
+mkdir -p ~/.claude
+ln -sfn "$PWD/AGENTS.md" ~/.claude/CLAUDE.md
+
+# 2. All skills. Link every skill directory into ~/.claude/skills. Re-run this
+#    after adding a new skill — it is idempotent.
+mkdir -p ~/.claude/skills
+for skill in "$PWD"/skills/*/; do
+  ln -sfn "$skill" ~/.claude/skills/"$(basename "$skill")"
+done
 ```
 
-**Other agents:** either symlink that agent's instruction file to `AGENTS.md`, or rely on the agent's native `AGENTS.md` discovery.
+**Other agents:** point that agent's instruction entrypoint at `AGENTS.md` (a symlink, or the agent's native `AGENTS.md` discovery), and link the `skills/` directories into wherever that agent loads skills from.
 
-Clone this repo and repeat the links on any machine to carry the workflow with you.
+Clone this repo and re-run the commands on any machine to carry the whole workflow with you.
