@@ -17,6 +17,10 @@ Verify is runtime observation — it complements the automated tests `validate` 
 4. **Observe real evidence.** Capture what actually happened: output, logs, exit code, HTTP response, on-screen state, DB rows, a screenshot. Observation over inference.
 5. **Compare** observed against the expected from step 1.
 
+## Visible UI changes
+
+Render and observe the page with a browser-automation tool unless the human has explicitly denied it — the project's own tool if it has one (Playwright, Puppeteer, Cypress, …); otherwise prefer Playwright. Capture a screenshot to judge the layout, and run programmatic checks for overflow, clipping, and off-screen elements. A screenshot plus passing layout checks is the evidence.
+
 ## Report
 
 Give a verdict plus evidence:

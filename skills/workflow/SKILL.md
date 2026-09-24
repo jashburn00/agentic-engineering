@@ -23,7 +23,7 @@ Process is proportional to stakes: a Minimal task takes a light path; a Full tas
 
 6. **Conditional lenses** — invoke based on the change, not by default:
    - `security-review` when it touches a security surface (input, auth, data, secrets, external calls, new dependencies).
-   - `verify` when there is runtime behavior worth observing (a fix, a feature, UI, integration).
+   - `verify` when there is runtime behavior worth observing (a fix, a feature, UI, integration); a visible UI change defaults to rendering and screenshotting the page.
 
 7. **Land** — with `git-safety`: commit (repo conventions and any authorship rules), push a feature branch, and open a PR whose body carries the summary and evidence (validation results, findings, what was verified). Opening a PR is the normal reversible landing, not an escalation. Then, by tier and lane:
    - **Minimal** — PR opened autonomously; report "done, PR #N."
