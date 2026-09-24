@@ -1,6 +1,6 @@
 # agentic-engineering
 
-A suite of AI skills for agentic software engineering — a repeatable, comprehensive workflow that gets the most out of coding agents while producing high-quality, maintainable, human-reviewable output.
+A suite of AI skills for agentic software engineering — a repeatable, comprehensive workflow that gets the most out of coding agents: high-quality, maintainable, human-reviewable output with minimal human time and effort.
 
 ## Design principles
 
