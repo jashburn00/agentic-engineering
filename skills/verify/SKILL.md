@@ -23,7 +23,7 @@ Render and observe the page with a browser-automation tool unless the human has 
 
 - **Reproduce the real condition** — the actual state that matters (a loading/error state, the reported bug), not a convenient approximation.
 - **Sweep the size range, don't spot-check** — a continuous range of viewport sizes and orientations (mobile, portrait/landscape, laptop/desktop), including the smallest realistic and browser-chrome-reduced heights. Assert no overflow, clipping, or off-screen content at every step, not at one or two cherry-picked sizes.
-- **Surface the evidence** — capture before/after screenshots, save them to a stable path, and hand them to the human in the review (and the PR where practical), not buried in a gitignored folder. Screenshots across the range plus passing layout checks are the evidence.
+- **Surface the evidence** — save it to a durable path outside any disposable worktree (never a gitignored or build folder), to be published with the PR at landing (see `workflow` Land). For a UI change the evidence is before/after screenshots across the range plus the passing layout checks; a change with no visual result is better served by durable test logs or command output.
 
 ## Report
 
