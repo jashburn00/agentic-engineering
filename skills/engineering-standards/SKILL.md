@@ -20,6 +20,7 @@ Code is read by developers of any level and must pass human review. A junior sho
 5. **Structure as visible steps.** Group logic into small blocks (~4–15 lines), one step each, separated by a blank line that marks the next step.
 6. **Comment every block; scale with complexity.** Default: one full-line comment above each block, narrating the step (e.g. *"trim spaces and test the query against the sanitization regex"*) — situational to adjust. Obvious block → that one line. Complex operation (external libraries, logic-heavy calls) → more, up to one comment per line. Narrate, don't lecture; cut any comment that only restates obvious code.
 7. **Treat errors as expected, not exceptional.** Anticipate failure at every operation that can fail. Handle errors and edge cases gracefully, log them with enough context to diagnose, and never silently discard an error.
+8. **Design for robustness.** As you write and plan, reason about the ways it can break — concurrency and race conditions, resource lifecycle (acquire and release; no leaks), and failure modes (timeouts, retries, idempotency, partial failure, degraded state) — not just the happy path.
 
 ## Gate B — Validation
 
