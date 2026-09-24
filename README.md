@@ -10,7 +10,7 @@ A suite of AI skills for agentic software engineering — a repeatable, comprehe
 - **Process proportional to stakes.** `triage` scales rigor to a change's reversibility and blast radius — a light path for trivial changes, the full pipeline for consequential ones.
 - **Human-in-the-loop where it matters.** Agents run autonomously through the middle; your attention is reserved for the two decisions that need it — signing off the plan on a risky change, and the final merge.
 - **Minimal hot path.** Anything auto-loaded into every agent (`CLAUDE.md`/`AGENTS.md`) stays tiny; heavy content lives in skills that load on demand (progressive disclosure).
-- **Token-lean authoring.** Skill text is kept as concise as we can manage without losing intent, and structured data is written in TOON rather than JSON to cut tokens losslessly.
+- **Token-lean authoring.** Skill text is intentionally kept concise without losing intent, and structured data is written in TOON rather than JSON to cut tokens losslessly.
 
 ## The workflow
 
