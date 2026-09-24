@@ -51,6 +51,30 @@ The `workflow` skill is the conductor — after you give a task, it runs every s
 
 *Outside this sequence: the always-loaded `AGENTS.md` system prompt, and the `toon` syntax reference, pulled in whenever structured data is written.*
 
+## Proof of concept
+
+A real end-to-end run of the pipeline during its early stages. Given only a bug report about a login screen that overflowed the viewport on a cold start, a lead agent ran the whole workflow by dispatching specialized subagents to triage, implement, validate, verify, and land the change, then synthesizing their results. It delivered on the primary goal: minimal human attention — the human was pulled in only for the final merge — for maximum quality output.
+
+The artifacts this run left behind mirror the safety and quality checks the workflow is built to enforce. The fix wasn't declared done on a claim: a verify subagent reproduced the bug and re-checked the fix across the *full* viewport-height range rather than one convenient size, the overflow guarantee was gated on a real screenshot sweep, and the paired before/after captures were published to a durable orphan `evidence` branch — disconnected from code history so the proof can't drift or be lost. The pull request then presented the diagnosis, the fix, and that evidence in the form a human reviewer needs to sign off without re-running anything.
+
+![The pull request the workflow opened — problem statement and the fix](media/POC-1.png)
+*The pull request the pipeline produced: the problem a subagent diagnosed and the fix it applied, written up for a human reviewer.*
+
+![The evidence section of the PR — before/after screenshots across viewport heights](media/POC-2.png)
+*Evidence over claims. A verify subagent proved the fix across the entire viewport-height range — a before/after screenshot table plus the overflow check that gates the result, not a single hand-picked size.*
+
+![The lead agent delegating the workflow end-to-end in the terminal](media/POC-3.png)
+*The lead agent as manager: it delegates triage → implement → validate → verify → land to scoped subagents, gathers their findings, and lands a clean squash-merge — all in one autonomous run.*
+
+![Before — login screen overflowing at 680px height, on the durable evidence branch](media/POC-4.png)
+*Before: the bug reproduced at 680px viewport height, captured to a durable orphan `evidence` branch that lives independently of code history so the proof can't drift or be lost.*
+
+![After — the same viewport with the overflow fixed](media/POC-5.png)
+*After: the same viewport, overflow resolved — the paired counter-evidence to the failure above.*
+
+![After — the fix confirmed at another viewport height](media/POC-6.png)
+*After: robustness demonstrated, not asserted — the fix holds at a second viewport height, part of the sweep across the range.*
+
 ## Layout
 
 ```
