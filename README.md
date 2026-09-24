@@ -4,9 +4,47 @@ A suite of AI skills for agentic software engineering — a repeatable, comprehe
 
 ## Design principles
 
-- **Minimal hot path.** Anything auto-loaded into every agent (`CLAUDE.md`) stays tiny. Heavy content lives in skills, which load on demand (progressive disclosure).
+- **Agent-agnostic.** The system prompt lives in `AGENTS.md` (the cross-agent convention) and every skill is plain markdown, so the suite works with any coding agent, not just Claude Code.
+- **Quality is a gate, not a hope.** Every change must clear two co-equal gates — simplicity/readability and validation/testing — with correctness winning ties. "Done" means simple *and* validated.
+- **Evidence over claims.** Nothing is reported done on an unverified claim; gates and runtime checks produce evidence a reviewer can trust without re-running it.
+- **Process proportional to stakes.** `triage` scales rigor to a change's reversibility and blast radius — a light path for trivial changes, the full pipeline for consequential ones.
+- **Human-in-the-loop where it matters.** Agents run autonomously through the middle; the human is concentrated at planning (only when a change escalates) and the merge decision.
+- **Minimal hot path.** Anything auto-loaded into every agent (`CLAUDE.md`/`AGENTS.md`) stays tiny; heavy content lives in skills that load on demand (progressive disclosure).
 - **Token-lean authoring.** Skill text is written in the fewest tokens that preserve all intent.
-- **Reversibility-based autonomy.** Agents act autonomously on reversible/local changes; irreversible, architectural, or security decisions escalate to the human.
+
+## The workflow
+
+One task, from request to a landed PR — each step invokes a dedicated skill, scaled to the change's stakes:
+
+```
+  task
+  │
+  ▼
+  triage      ──▶  lane: autonomous | escalate · tier: Minimal | Complete
+  │
+  ▼
+  define done ──▶  acceptance criteria, stated up front
+  │
+  ▼
+  plan        ──▶  escalated tasks only · human sign-off · docs/plans/<task>.md
+  │
+  ▼
+  implement   ──▶  under engineering-standards (Gate A)
+  │
+  ▼
+  validate    ──▶  format → lint → build → test → review
+  │
+  ├──▶ security-review   when the change touches a security surface
+  ├──▶ verify            when there is runtime behavior to observe
+  │
+  ▼
+  land        ──▶  git-safety · feature branch · PR + evidence
+  │
+  ▼
+  merge       ──▶  the human's call
+                   Minimal → autonomous PR + notify
+                   Complete / Escalated → review, then merge
+```
 
 ## Layout
 
