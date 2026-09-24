@@ -59,6 +59,7 @@ skills/
 ├── security-review/         Application-security lens → vulnerability findings + severity + remediation.
 ├── verify/                  Runtime-observation lens → run the change, observe, report with evidence.
 ├── git-safety/              Operational git safety → secret hygiene, safe operations, correct routing.
+├── frontend-practices/      Engineering-robustness standards for UI (responsive, overflow, states, a11y).
 └── toon/                    TOON syntax reference (cold-loaded) for the AGENTS.md TOON directive.
 ```
 
