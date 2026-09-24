@@ -4,7 +4,6 @@ A suite of AI skills for agentic software engineering — a repeatable, comprehe
 
 ## Design principles
 
-- **Skills-first, orchestration-later.** Build portable quality skills on native Claude Code primitives (skills, subagents, hooks, `CLAUDE.md`) first; add a multi-tier orchestrator only when parallel cross-repo work justifies it.
 - **Minimal hot path.** Anything auto-loaded into every agent (`CLAUDE.md`) stays tiny. Heavy content lives in skills, which load on demand (progressive disclosure).
 - **Token-lean authoring.** Skill text is written in the fewest tokens that preserve all intent.
 - **Reversibility-based autonomy.** Agents act autonomously on reversible/local changes; irreversible, architectural, or security decisions escalate to the human.
@@ -36,14 +35,10 @@ The repo is the source of truth. Installing it means symlinking two things into 
 **Claude Code:**
 
 ```sh
-# 1. Global system prompt. Claude Code auto-loads ~/.claude/CLAUDE.md in every
-#    session; symlinking it to AGENTS.md makes the agent-agnostic system prompt
-#    active machine-wide. (Non-Claude agents read AGENTS.md directly.)
-mkdir -p ~/.claude
+# Symlink Claude Code's system-prompt location to this repo's AGENTS.md.
 ln -sfn "$PWD/AGENTS.md" ~/.claude/CLAUDE.md
 
-# 2. All skills. Link every skill directory into ~/.claude/skills. Re-run this
-#    after adding a new skill — it is idempotent.
+# Link every skill into ~/.claude/skills (idempotent — re-run after adding a skill).
 mkdir -p ~/.claude/skills
 for skill in "$PWD"/skills/*/; do
   ln -sfn "$skill" ~/.claude/skills/"$(basename "$skill")"
