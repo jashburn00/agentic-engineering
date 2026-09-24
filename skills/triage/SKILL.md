@@ -26,7 +26,7 @@ When unsure which lane applies, escalate.
 
 ## On escalate — don't just stop
 
-Present the decision crisply: what is being decided, the viable options, your recommendation with reasoning, and the risk or cost. For design-level decisions, interview to resolve each open branch (in Claude, the `grill-me` skill). Batch related decisions into one ask rather than interrupting repeatedly.
+Present the decision crisply: what is being decided, the viable options, your recommendation with reasoning, and the risk or cost. For design-level decisions, resolve each open branch with the human (`planning-lite` by default, or `planning` for high-stakes or ambiguous work). Batch related decisions into one ask rather than interrupting repeatedly.
 
 ## Set the rigor tier (how much of the `validate` pipeline to run)
 

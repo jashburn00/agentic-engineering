@@ -15,7 +15,7 @@ Process is proportional to stakes: a Minimal task takes a light path; a Full tas
 
 2. **Define done** — before implementing, state the task's acceptance criteria: which tests, checks, and observed behaviors must pass (`engineering-standards` Gate B rule 1 — define done, don't guess it). For escalated tasks this lives in the plan; otherwise state it briefly up front.
 
-3. **Plan** — *only when triage escalates.* Write a plan to `docs/plans/<task-slug>.md`, resolve open decisions with the human (`grill-me`), and get sign-off before coding. Non-escalated tasks skip this step and proceed.
+3. **Plan** — *only when triage escalates.* Write a plan to `docs/plans/<task-slug>.md`, resolve open decisions with the human (`planning-lite` by default, or `planning` for high-stakes or ambiguous work), and get sign-off before coding. Non-escalated tasks skip this step and proceed.
 
 4. **Implement** — make the change under `engineering-standards` (and, for a frontend/UI change, `frontend-practices`). Small, coherent diffs; write the tests for changed behavior here (Gate B); follow the plan when one exists.
 

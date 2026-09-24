@@ -14,37 +14,42 @@ A suite of AI skills for agentic software engineering — a repeatable, comprehe
 
 ## The workflow
 
-One task, from request to a landed PR. Each step runs a dedicated skill, scaled to the change's stakes — and you're only needed at the two ends:
+The `workflow` skill is the conductor — after you give a task, it runs every step below, scaled to the change's stakes; you're only needed at the two ends (★):
 
 ```
   task        ──▶  ★ YOU describe what you want built
   │
   ▼
-  triage      ──▶  sizes up the change — how risky, how far-reaching — to set how much process it needs
+  workflow    ──▶  the conductor takes over and runs the steps below, scaled to the change
+  │
+  ▼
+  triage      ──▶  sizes up the change — risk and reach — to set how much process it needs
   │
   ▼
   define done ──▶  decides what "done" looks like before any code is written
   │
   ▼
-  plan        ──▶  risky changes only: drafts an approach and gets your sign-off first
+  plan        ──▶  risky changes only: drafts an approach and gets your sign-off  (planning-lite / planning)
   │
   ▼
-  implement   ──▶  writes the change to the project's quality standards
+  implement   ──▶  writes the change to standards  (engineering-standards; + frontend-practices for UI)
   │
   ▼
-  validate    ──▶  formats, builds, tests, and reviews it — auto-fixing what it can, flagging what it can't
+  validate    ──▶  formats, builds, tests, and reviews it — fixing what it can, flagging what it can't  (review)
   │
   ├──▶ security-review   if it touches auth, input, or data, hunts for vulnerabilities
-  ├──▶ verify            if there's behavior to see, actually runs it and watches
+  ├──▶ verify            if there's behavior to see, runs it and watches  (screenshots for UI)
   │
   ▼
-  land        ──▶  commits to a fresh branch and opens a pull request, evidence attached
+  land        ──▶  commits to a branch and opens a pull request with evidence  (git-safety)
   │
   ▼
   merge       ──▶  ★ YOU review the pull request and decide whether to merge
 ```
 
 **You're in the loop at just the two ends** (★) — the *task* you ask for and the *merge* you approve. Everything between runs on its own; a change only pulls you back early for a quick *plan* sign-off when it's risky enough to warrant it.
+
+*Outside this sequence: the always-loaded `AGENTS.md` system prompt, and the `toon` syntax reference, pulled in whenever structured data is written.*
 
 ## Layout
 
@@ -54,6 +59,8 @@ skills/
 ├── engineering-standards/   The code-quality constitution (Gate A + Gate B).
 ├── workflow/                Conductor → sequences the skills below into one tier-proportional pipeline.
 ├── triage/                  Reversibility/blast-radius classifier → autonomy lane + rigor tier.
+├── planning/                Thorough plan interrogation (decision tree, one question at a time).
+├── planning-lite/           Quick plan with minimal human interruption.
 ├── validate/                Standalone validation pipeline → findings + pass/blocked verdict.
 ├── review/                  Code-review judgment lens → correctness/quality findings + verdict.
 ├── security-review/         Application-security lens → vulnerability findings + severity + remediation.
