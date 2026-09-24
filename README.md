@@ -5,7 +5,7 @@ A suite of AI skills for agentic software engineering — a repeatable, comprehe
 ## Design principles
 
 - **Agent-agnostic.** The system prompt lives in `AGENTS.md` (the cross-agent convention) and every skill is plain markdown, so the suite works with any coding agent, not just Claude Code.
-- **Quality is a gate, not a hope.** Every change must clear two co-equal gates — simplicity, readability, and extensibility on one side; validation and testing on the other — with correctness winning ties. "Done" means well-built *and* validated. Some skills deliberately reference other skills, so the pipeline doesn't rely on arbitrary or automatic agent invocation.
+- **Quality is a gate, not a hope.** Every change must clear two co-equal gates — simplicity, readability, and extensibility on one side; validation and testing on the other — with correctness winning ties. "Done" means well-built *and* validated. Some skills deliberately reference other skills, so the pipeline doesn't rely on arbitrary or automatic skill invocation.
 - **Evidence over claims.** Nothing is reported done on an unverified claim; gates and runtime checks produce evidence a reviewer can trust without re-running it.
 - **Process proportional to stakes.** `triage` scales rigor to a change's reversibility and blast radius — a light path for trivial changes, the full pipeline for consequential ones.
 - **Human-in-the-loop where it matters.** Agents run autonomously through the middle; your attention is reserved for the two decisions that need it — signing off the plan on a risky change, and the final merge.
