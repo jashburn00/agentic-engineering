@@ -2,6 +2,14 @@
 
 A suite of AI skills for agentic software engineering — a repeatable, comprehensive workflow that gets the most out of coding agents: high-quality, maintainable, human-reviewable output with minimal human time and effort.
 
+## Contents
+
+- [Design principles](#design-principles)
+- [The workflow](#the-workflow)
+- [Proof of concept](#proof-of-concept)
+- [Layout](#layout)
+- [Installation](#installation)
+
 ## Design principles
 
 - **Agent-agnostic.** The system prompt lives in `AGENTS.md` (the cross-agent convention) and every skill is plain markdown, so the suite works with any coding agent, not just Claude Code.
