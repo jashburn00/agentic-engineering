@@ -5,7 +5,7 @@ description: Review a code change (a diff or PR) for correctness and quality aga
 
 # Review
 
-Read the change — the diff, plus enough surrounding code to understand intent — and judge it against the `engineering-standards` constitution. Report findings; do not rewrite the code unless asked.
+Read the change — the diff, plus enough surrounding code to understand intent — and judge it against the `engineering-standards` constitution (and, for UI changes, `frontend-practices`). Report findings; do not rewrite the code unless asked.
 
 Review targets what mechanical gates cannot: logic, edge cases, design, and clarity of intent. Do not re-flag what a formatter or linter already enforces, and do not duplicate security review (a separate lens).
 

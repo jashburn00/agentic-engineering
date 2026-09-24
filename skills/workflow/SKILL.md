@@ -17,7 +17,7 @@ Process is proportional to stakes: a Minimal task takes a light path; a Full tas
 
 3. **Plan** — *only when triage escalates.* Write a plan to `docs/plans/<task-slug>.md`, resolve open decisions with the human (`grill-me`), and get sign-off before coding. Non-escalated tasks skip this step and proceed.
 
-4. **Implement** — make the change under `engineering-standards`. Small, coherent diffs; write the tests for changed behavior here (Gate B); follow the plan when one exists.
+4. **Implement** — make the change under `engineering-standards` (and, for a frontend/UI change, `frontend-practices`). Small, coherent diffs; write the tests for changed behavior here (Gate B); follow the plan when one exists.
 
 5. **Validate** — run `validate` at the tier from step 1. Apply mechanical fixes; escalate judgment findings. `validate`'s review gate is the `review` skill — do not run `review` again separately.
 
