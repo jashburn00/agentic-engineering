@@ -9,6 +9,8 @@ The repeatable process for a coding task: request in → PR + evidence out. It r
 
 Process is proportional to stakes: a Minimal task takes a light path; a Full task runs everything. Never spend more process than the change warrants, or less.
 
+Use subagents where sensible; the same agent running different tasks and having contextual knowledge of them can break the intended atomicity of steps.
+
 ## Steps
 
 1. **Triage** — classify with `triage`: the lane (autonomous vs escalate) and the rigor tier (Minimal or Complete). Everything below scales to this.
