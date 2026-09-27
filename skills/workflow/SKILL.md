@@ -19,7 +19,7 @@ Use subagents where sensible; the same agent running different tasks and having 
 
 3. **Plan** — *only when triage escalates.* Write a plan to `docs/plans/<task-slug>.md`, resolve open decisions with the human (`planning-lite` by default, or `planning` for high-stakes or ambiguous work), and get sign-off before coding. Non-escalated tasks skip this step and proceed.
 
-4. **Implement** — make the change under `engineering-standards` (and, for a frontend/UI change, `frontend-practices`). Small, coherent diffs; write the tests for changed behavior here (Gate B); follow the plan when one exists.
+4. **Implement** — orient from the project's codebase map (`codebase-map`) before changing code you don't already hold in context, rather than re-deriving the layout. Make the change under `engineering-standards` (and, for a frontend/UI change, `frontend-practices`). Small, coherent diffs; write the tests for changed behavior here (Gate B); follow the plan when one exists.
 
 5. **Validate** — run `validate` at the tier from step 1. Apply mechanical fixes; escalate judgment findings. `validate`'s review gate is the `review` skill — do not run `review` again separately.
 
@@ -27,7 +27,7 @@ Use subagents where sensible; the same agent running different tasks and having 
    - `security-review` when it touches a security surface (input, auth, data, secrets, external calls, new dependencies).
    - `verify` when there is runtime behavior worth observing (a fix, a feature, UI, integration); a visible UI change defaults to rendering and screenshotting the page.
 
-7. **Land** — with `git-safety`: commit (repo conventions and any authorship rules), push a feature branch, and open a PR whose body carries the summary and evidence (validation results, findings, what was verified). Opening a PR is the normal reversible landing, not an escalation. Publish screenshots and other visual evidence to an orphan `evidence` branch — one folder per PR, disconnected from code history and never merged — and link them from the PR body; preserve them before any worktree cleanup. Then, by tier and lane:
+7. **Land** — with `git-safety`: commit (repo conventions and any authorship rules), push a feature branch, and open a PR whose body carries the summary and evidence (validation results, findings, what was verified). Opening a PR is the normal reversible landing, not an escalation. If the change altered the project's structure, update the codebase map (`codebase-map`) in the same PR. Publish screenshots and other visual evidence to an orphan `evidence` branch — one folder per PR, disconnected from code history and never merged — and link them from the PR body; preserve them before any worktree cleanup. Then, by tier and lane:
    - **Minimal** — PR opened autonomously; report "done, PR #N."
    - **Complete, autonomous** — PR with summary; await the merge decision.
    - **Escalated** — request review before merge, surfacing the key decisions and risks.

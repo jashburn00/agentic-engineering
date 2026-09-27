@@ -18,6 +18,7 @@ A suite of AI skills for agentic software engineering — a repeatable, comprehe
 - **Process proportional to stakes.** `triage` scales rigor to a change's reversibility and blast radius — a light path for trivial changes, the full pipeline for consequential ones.
 - **Human-in-the-loop where it matters.** Agents run autonomously through the middle; your attention is reserved for the two decisions that need it — signing off the plan on a risky change, and the final merge.
 - **Minimal hot path.** Anything auto-loaded into every agent (`CLAUDE.md`/`AGENTS.md`) stays tiny; heavy content lives in skills that load on demand (progressive disclosure).
+- **A persistent, high-level codebase map** lets agents orient from a durable doc instead of re-deriving the layout on each run — saving time and tokens — with an update-on-structural-change plus fix-on-read discipline so it stays honest.
 - **Token-lean authoring.** Skill text is intentionally somewhat concise without losing intent, and structured data is written in TOON rather than JSON to cut tokens losslessly.
 
 ## The workflow
@@ -40,7 +41,7 @@ The `workflow` skill is the conductor — after you give a task, it runs every s
   plan        ──▶  risky changes only: drafts an approach and gets your sign-off  (planning-lite / planning)
   │
   ▼
-  implement   ──▶  writes the change to standards  (engineering-standards; + frontend-practices for UI)
+  implement   ──▶  writes the change to standards  (engineering-standards; codebase-map to orient; + frontend-practices for UI)
   │
   ▼
   validate    ──▶  formats, builds, tests, and reviews it — fixing what it can, flagging what it can't  (review)
@@ -49,7 +50,7 @@ The `workflow` skill is the conductor — after you give a task, it runs every s
   ├──▶ verify            if there's behavior to see, runs it and watches  (screenshots for UI)
   │
   ▼
-  land        ──▶  commits to a branch and opens a pull request with evidence  (git-safety)
+  land        ──▶  commits to a branch and opens a pull request with evidence  (git-safety; codebase-map on structural change)
   │
   ▼
   merge       ──▶  ★ YOU review the pull request and decide whether to merge
@@ -99,6 +100,7 @@ skills/
 ├── verify/                  Runtime-observation lens → run the change, observe, report with evidence.
 ├── git-safety/              Operational git safety → secret hygiene, safe operations, correct routing.
 ├── frontend-practices/      Engineering-robustness standards for UI (responsive, overflow, states, a11y).
+├── codebase-map/            Persistent high-level project map → orient fast, update on structural change.
 └── toon/                    TOON syntax reference (cold-loaded) for the AGENTS.md TOON directive.
 ```
 
