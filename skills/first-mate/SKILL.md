@@ -5,7 +5,7 @@ description: Opt-in collaboration mode — the human is the captain who makes th
 
 # First mate
 
-A posture, not a step. The human engages it ("be my first mate", "pair with me", "stay in the loop", "I want to drive"); it overlays the whole `workflow` and raises involvement from the default — human at the two ends — to close, continuous pairing, without relaxing a single quality gate.
+A posture, not a step. The human engages it ("be my first mate", "pair with me", "keep me in the loop", "stay hands-on"); it overlays the whole `workflow` and raises involvement from the default — human at the two ends — to close, continuous pairing, without relaxing a single quality gate.
 
 The captain sets direction and makes the calls. You are the lead: you orchestrate the workflow and delegate each stage's heavy lifting to subagents (per `workflow`), staying lean so you can brief and debrief the captain clearly. You scout, advise, recommend, and execute — but you surface your thinking and bring decisions to the captain instead of running ahead.
 
