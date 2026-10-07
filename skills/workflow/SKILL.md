@@ -11,13 +11,15 @@ Process is proportional to stakes: a Minimal task takes a light path; a Full tas
 
 Use subagents where sensible; the same agent running different tasks and having contextual knowledge of them can break the intended atomicity of steps.
 
+**Involvement is a mode.** By default you run autonomously through the middle, pulling the human in only for a risky-change plan sign-off and the final merge. When the human engages first-mate mode (`first-mate`), raise involvement across every step below — pair continuously and confirm at each stage boundary — without changing what the steps do or lowering any gate.
+
 ## Steps
 
 1. **Triage** — classify with `triage`: the lane (autonomous vs escalate) and the rigor tier (Minimal or Complete). Everything below scales to this.
 
 2. **Define done** — before implementing, state the task's acceptance criteria: which tests, checks, and observed behaviors must pass (`engineering-standards` Gate B rule 1 — define done, don't guess it). For escalated tasks this lives in the plan; otherwise state it briefly up front.
 
-3. **Plan** — *only when triage escalates.* Write a plan to `docs/plans/<task-slug>.md`, resolve open decisions with the human (`planning-lite` by default, or `planning` for high-stakes or ambiguous work), and get sign-off before coding. Non-escalated tasks skip this step and proceed.
+3. **Plan** — *only when triage escalates.* Write a plan to `docs/plans/<task-slug>.md`, resolve open decisions with the human (`planning-lite` by default, or `planning` for high-stakes or ambiguous work), and get sign-off before coding. Non-escalated tasks skip this step and proceed. Under first-mate mode, default to `planning` and walk the decision tree together.
 
 4. **Implement** — orient from the project's codebase map (`codebase-map`) before changing code you don't already hold in context, rather than re-deriving the layout. Make the change under `engineering-standards` (and, for a frontend/UI change, `frontend-practices`). Small, coherent diffs; write the tests for changed behavior here (Gate B); follow the plan when one exists.
 

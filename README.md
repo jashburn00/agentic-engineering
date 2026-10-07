@@ -16,7 +16,7 @@ A suite of AI skills for agentic software engineering — a repeatable, comprehe
 - **Quality is a gate, not a hope.** Every change must clear two co-equal gates — simplicity, readability, and extensibility on one side; validation and testing on the other — with correctness winning ties. "Done" means well-built *and* validated. Some skills deliberately reference other skills, so the pipeline doesn't rely on arbitrary or automatic skill invocation.
 - **Evidence over claims.** Nothing is reported done on an unverified claim; gates and runtime checks produce evidence a reviewer can trust without re-running it.
 - **Process proportional to stakes.** `triage` scales rigor to a change's reversibility and blast radius — a light path for trivial changes, the full pipeline for consequential ones.
-- **Human-in-the-loop where it matters.** Agents run autonomously through the middle; your attention is reserved for the two decisions that need it — signing off the plan on a risky change, and the final merge.
+- **Human-in-the-loop where it matters.** Agents run autonomously through the middle; your attention is reserved for the two decisions that need it — signing off the plan on a risky change, and the final merge. That's the default; when you want to stay at the helm throughout, `first-mate` mode layers continuous, stage-by-stage check-ins over the whole pipeline without lowering any gate.
 - **Minimal hot path.** Anything auto-loaded into every agent (`CLAUDE.md`/`AGENTS.md`) stays tiny; heavy content lives in skills that load on demand (progressive disclosure).
 - **A persistent, high-level codebase map** lets agents orient from a durable doc instead of re-deriving the layout on each run — saving time and tokens — with an update-on-structural-change plus fix-on-read discipline so it stays honest.
 - **Token-lean authoring.** Skill text is intentionally somewhat concise without losing intent, and structured data is written in TOON rather than JSON to cut tokens losslessly.
@@ -60,6 +60,8 @@ The `workflow` skill is the conductor — after you give a task, it runs every s
 
 *Outside this sequence: the always-loaded `AGENTS.md` system prompt, and the `toon` syntax reference, pulled in whenever structured data is written.*
 
+*First-mate mode (`first-mate`) is the opt-in inverse: engage it when you want to stay at the helm the whole way, and the agent pairs with you at every stage instead of just the two ends.*
+
 ## Proof of concept
 
 A real end-to-end run of the pipeline during its early stages. Given only a bug report about a login screen that overflowed the viewport on a cold start, a lead agent ran the whole workflow by dispatching specialized subagents to triage, implement, validate, verify, and land the change, then synthesizing their results. It delivered on the primary goal: minimal human attention — the human was pulled in only for the final merge — for maximum quality output.
@@ -91,6 +93,7 @@ AGENTS.md                    Agent-agnostic system prompt (the entrypoint every 
 skills/
 ├── engineering-standards/   The code-quality constitution (Gate A + Gate B).
 ├── workflow/                Conductor → sequences the skills below into one tier-proportional pipeline.
+├── first-mate/              Opt-in collaboration mode → human as captain, agent as first mate; pairs across the whole pipeline.
 ├── triage/                  Reversibility/blast-radius classifier → autonomy lane + rigor tier.
 ├── planning/                Thorough plan interrogation (decision tree, one question at a time).
 ├── planning-lite/           Quick plan with minimal human interruption.

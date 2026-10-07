@@ -24,6 +24,8 @@ Before acting on a task or a consequential decision, classify it on two axes, th
 
 When unsure which lane applies, escalate.
 
+Under first-mate mode (`first-mate`), the lane shifts toward the captain: surface even autonomous-eligible changes for a quick confirm rather than proceeding silently.
+
 ## On escalate — don't just stop
 
 Present the decision crisply: what is being decided, the viable options, your recommendation with reasoning, and the risk or cost. For design-level decisions, resolve each open branch with the human (`planning-lite` by default, or `planning` for high-stakes or ambiguous work). Batch related decisions into one ask rather than interrupting repeatedly.
