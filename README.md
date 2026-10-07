@@ -104,6 +104,7 @@ skills/
 ├── git-safety/              Operational git safety → secret hygiene, safe operations, correct routing.
 ├── frontend-practices/      Engineering-robustness standards for UI (responsive, overflow, states, a11y).
 ├── codebase-map/            Persistent high-level project map → orient fast, update on structural change.
+├── orient/                  Human-facing orientation briefing → progressive tour of an unfamiliar codebase, read-only.
 └── toon/                    TOON syntax reference (cold-loaded) for the AGENTS.md TOON directive.
 ```
 
