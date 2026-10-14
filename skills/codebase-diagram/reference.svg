@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 690" role="img" aria-label="Style reference: a context diagram and a component diagram for a generic search engine">
+  <!--
+    Style reference for the codebase-diagram skill. The system shown is made up; copy the look, not the content.
+    Context: names only, the system as a solid dark box, short verb labels.
+    Component: components nested inside their container, layered top to bottom by call direction,
+    a dotted logical group, cylinders for datastores, notches for interface vs concrete, a two-item legend.
+  -->
+  <style>
+    svg { --bg: #ffffff; --ink: #1a1a1a; --muted: #5c5c5c; --line: #333333; --box: #ffffff;
+          --shade: #e4e4e4; --ext: #d6d6d6; --system: #111111; --on-system: #ffffff; --soft: #9a9a9a; }
+    @media (prefers-color-scheme: dark) {
+      svg { --bg: #161616; --ink: #ececec; --muted: #a8a8a8; --line: #cfcfcf; --box: #232323;
+            --shade: #2e2e2e; --ext: #3a3a3a; --system: #f0f0f0; --on-system: #111111; --soft: #6e6e6e; }
+    }
+    text { fill: var(--ink); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    .title { font-size: 22px; letter-spacing: 0.08em; }
+    .name { font-size: 14px; font-weight: 600; }
+    .cname { font-size: 17px; font-weight: 600; }
+    .desc { font-size: 12px; fill: var(--muted); }
+    .lbl { font-size: 11px; }
+    .note { font-size: 11px; fill: var(--muted); }
+    .bg { fill: var(--bg); }
+    .box { fill: var(--box); stroke: var(--line); stroke-width: 1.2; }
+    .ext { fill: var(--ext); stroke: var(--line); stroke-width: 1.2; }
+    .shade { fill: var(--shade); stroke: var(--line); stroke-width: 1.2; }
+    .system { fill: var(--system); }
+    .on-system { fill: var(--on-system); font-size: 15px; font-weight: 600; }
+    .boundary { fill: none; stroke: var(--line); stroke-width: 1; }
+    .group { fill: none; stroke: var(--line); stroke-width: 1; stroke-dasharray: 3 3; }
+    .divider { stroke: var(--soft); stroke-width: 1; }
+    .wire { stroke: var(--line); stroke-width: 1.3; fill: none; }
+    .person { fill: var(--ext); stroke: var(--line); stroke-width: 1.2; }
+    .db { fill: var(--ext); stroke: var(--line); stroke-width: 1.2; }
+    .iface { fill: var(--box); stroke: var(--line); stroke-width: 1.2; }
+    .impl { fill: var(--line); stroke: var(--line); stroke-width: 1.2; }
+    .head { fill: var(--line); }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path class="head" d="M0,0 L10,5 L0,10 z"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1000" height="690"/>
+
+  <!-- ===== CONTEXT ===== -->
+  <text class="title" x="160" y="40" text-anchor="middle">CONTEXT</text>
+
+  <circle class="person" cx="65" cy="90" r="11"/>
+  <rect class="person" x="47" y="104" width="36" height="30" rx="9"/>
+  <rect class="ext" x="110" y="80" width="170" height="50"/>
+  <text class="name" x="195" y="110" text-anchor="middle">Client app</text>
+
+  <path class="wire" d="M195,130 L195,248" marker-end="url(#arrow)"/>
+  <text class="lbl" x="205" y="194">request results</text>
+
+  <rect class="system" x="110" y="250" width="170" height="70"/>
+  <text class="on-system" x="195" y="290" text-anchor="middle">Search engine</text>
+
+  <path class="wire" d="M195,320 L195,438" marker-end="url(#arrow)"/>
+  <text class="lbl" x="205" y="384">send receipts</text>
+
+  <rect class="ext" x="110" y="440" width="170" height="50"/>
+  <text class="name" x="195" y="470" text-anchor="middle">Email service</text>
+
+  <line class="divider" x1="315" y1="20" x2="315" y2="670"/>
+
+  <!-- ===== COMPONENT ===== -->
+  <text class="title" x="600" y="40" text-anchor="middle">COMPONENT</text>
+
+  <!-- legend: two items, only because the code has interfaces -->
+  <rect class="group" x="830" y="55" width="150" height="64"/>
+  <rect class="iface" x="842" y="74" width="14" height="8"/>
+  <text class="lbl" x="864" y="82">= interface</text>
+  <rect class="impl" x="842" y="98" width="14" height="8"/>
+  <text class="lbl" x="864" y="106">= concrete type</text>
+
+  <!-- external caller, outside the boundary -->
+  <rect class="ext" x="520" y="60" width="160" height="44"/>
+  <text class="name" x="600" y="87" text-anchor="middle">Client app</text>
+
+  <!-- system boundary and the container, shaded -->
+  <rect class="boundary" x="340" y="140" width="650" height="530"/>
+  <text class="note" x="978" y="663" text-anchor="end">Search engine</text>
+  <rect class="shade" x="360" y="165" width="400" height="480"/>
+  <text class="cname" x="380" y="192">API service (Go)</text>
+
+  <path class="wire" d="M600,104 L600,208" marker-end="url(#arrow)"/>
+  <text class="lbl" x="610" y="126">search requests</text>
+
+  <!-- layers, top to bottom by call direction -->
+  <rect class="box" x="390" y="210" width="340" height="46"/>
+  <text class="name" x="560" y="238" text-anchor="middle">Router layer (Gin)</text>
+
+  <path class="wire" d="M560,256 L560,300"/>
+  <rect class="box" x="390" y="300" width="340" height="46"/>
+  <rect class="impl" x="553" y="296" width="14" height="8"/>
+  <text class="name" x="560" y="328" text-anchor="middle">Handler layer</text>
+
+  <rect class="group" x="380" y="385" width="360" height="120"/>
+  <text class="note" x="560" y="402" text-anchor="middle">Service layer</text>
+
+  <path class="wire" d="M475,346 L475,415"/>
+  <rect class="box" x="395" y="415" width="160" height="70"/>
+  <rect class="iface" x="468" y="411" width="14" height="8"/>
+  <text class="name" x="475" y="445" text-anchor="middle">Search service</text>
+  <text class="desc" x="475" y="465" text-anchor="middle">full + instant search</text>
+
+  <path class="wire" d="M645,346 L645,415"/>
+  <rect class="box" x="565" y="415" width="160" height="70"/>
+  <rect class="iface" x="638" y="411" width="14" height="8"/>
+  <text class="name" x="645" y="445" text-anchor="middle">Sanitize service</text>
+  <text class="desc" x="645" y="465" text-anchor="middle">cleans query input</text>
+
+  <path class="wire" d="M475,485 L475,560"/>
+  <rect class="box" x="390" y="560" width="340" height="60"/>
+  <rect class="iface" x="468" y="556" width="14" height="8"/>
+  <text class="name" x="560" y="585" text-anchor="middle">Repository</text>
+  <text class="desc" x="560" y="605" text-anchor="middle">read-through: cache, then database</text>
+
+  <!-- datastores as cylinders, right of the container -->
+  <path class="wire" d="M730,575 L785,575 L785,445 L820,445"/>
+  <text class="lbl" x="779" y="510" text-anchor="middle" transform="rotate(-90 779 510)">check first</text>
+  <path class="db" d="M820,400 L820,476 A80,14 0 0 0 980,476 L980,400"/>
+  <ellipse class="db" cx="900" cy="400" rx="80" ry="14"/>
+  <text class="name" x="900" y="440" text-anchor="middle">Cache (Redis)</text>
+  <text class="desc" x="900" y="460" text-anchor="middle">search results</text>
+
+  <path class="wire" d="M730,605 L820,605"/>
+  <text class="lbl" x="790" y="621" text-anchor="middle">on miss</text>
+  <path class="db" d="M820,560 L820,636 A80,14 0 0 0 980,636 L980,560"/>
+  <ellipse class="db" cx="900" cy="560" rx="80" ry="14"/>
+  <text class="name" x="900" y="600" text-anchor="middle">Database (Postgres)</text>
+  <text class="desc" x="900" y="620" text-anchor="middle">sites, users</text>
+</svg>

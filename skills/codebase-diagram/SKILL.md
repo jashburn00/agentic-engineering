@@ -1,6 +1,6 @@
 ---
 name: codebase-diagram
-description: Produce a standalone, static HTML page that visually represents a project's architecture, zooming in C4-style — a summary, an architecture (context + container) diagram, a component diagram, then other details such as key flows and a module map — saved beside the codebase map. Use when a human asks to visualize, diagram, or "draw" a codebase's architecture or flow, or accepts orient's offer of a visual page. Also use to update the page when a change alters project structure, but only if the page (e.g. `docs/codebase-map.html`) already exists; if it doesn't, don't load this skill for code changes.
+description: Produce a standalone, static HTML page that visually represents a project's architecture, zooming in C4-style — a summary, a context diagram, a container diagram, a component diagram, then optional views such as data shape, key flows, and a module map — saved beside the codebase map. Use when a human asks to visualize, diagram, or "draw" a codebase's architecture or flow, or accepts orient's offer of a visual page. Also use to update the page when a change alters project structure, but only if the page (e.g. `docs/codebase-map.html`) already exists; if it doesn't, don't load this skill for code changes.
 ---
 
 # Codebase Diagram
@@ -18,21 +18,37 @@ Build it from what is already distilled: the codebase map if one exists, otherwi
 
 ## What it shows — coarse to fine
 
-The page follows the C4 model loosely: each section zooms one level further in. Use C4's levels and labelling, not its full notation.
+The page follows the C4 model loosely: each diagram zooms one level further in and adds one level of detail. Use C4's levels, not its full notation.
 
-1. **Summary** — the project name, a brief description of what it is and who or what uses it, and the commit (short hash) and date the page reflects.
-2. **Architecture diagram** — the C4 context and container levels in one picture. Draw the system boundary, the people and external systems around it, and the deployable pieces inside it (services, workers, CLIs, databases, queues). For a single-process project, this is the one box plus everything it talks to.
-3. **Component diagram** — zoom into the container that does the core work and show its major internal components and how they connect. Add a second component diagram only when another container is equally central. Never draw one per container by default.
-4. **Other details** — whatever else a newcomer needs, at your judgment. Prefer these when applicable:
-   - **Key flows** — one or two flows that matter most (e.g. the request lifecycle, the data pipeline, a job run), drawn as sequence or flow diagrams. Pick the flows a newcomer most needs. Don't try to cover every path.
-   - **Module map** — the top-level directories, each with its responsibility and entry points, and where to add things. It ties the diagrams to the folders in the repo.
+1. **Summary** — the project name, two or three sentences on what it is and who or what uses it, and the commit (short hash) and date the page reflects.
+2. **Context** — the system as one highest-contrast box (solid dark in light mode, inverted in dark mode), with the people and external systems around it. Names only. Each line gets a short verb phrase ("request search results").
+3. **Container** — the system boundary opened up: the deployable pieces inside it (services, workers, UIs, databases, caches, queues). Each box gets a name and a description of one or two lines. For a single-process project, merge this into the context diagram rather than drawing one box twice.
+4. **Component** — zoom into the container that does the core work. Draw its components *inside* its box, stacked in layers by call direction. Use mostly names, with the tech in the name ("Router layer (Gin)"). Add a second component diagram only when another container is equally central.
+5. **Optional views** — add each one only when the project has the thing it shows:
+   - **Data shape** — when there is a real datastore: cylinders that show the tables with their key fields, or the cache key patterns.
+   - **Blueprint** — when there is a real API surface: one column per container, listing its endpoints, controllers or handlers, and services as short bullets. It is denser, so it goes after the diagrams.
+   - **Key flows** — one or two flows a newcomer most needs. Draw each flow as numbered markers (①②③) on a copy of the component diagram. Use a sequence diagram only when timing or async hand-off is the point of the flow.
+   - **Module map** — a table of the top-level directories, each with its responsibility and where to add things.
 
 Keep the same altitude as the codebase map: leave out function signatures, line numbers, and exhaustive file lists. Mark anything inferred rather than confirmed as `unverified` on the page itself.
+
+## Visual style
+
+The goal is a diagram the reader understands from its shape before reading a word. `reference.svg` in this skill's folder shows every rule below. Match its look.
+
+- **Layout shows structure.** Callers sit above what they call, so calls run top to bottom. Callers of the system go on the left or top, and datastores on the right or bottom. Never arrange boxes in an even grid, and never let lines cross.
+- **Containment instead of arrows.** Draw components inside their container's shaded box, and containers inside the system boundary. External systems sit outside the boundary. Use a dotted box for a logical group (e.g. "Service layer").
+- **Shapes carry meaning.** Draw people as a person figure and datastores, caches, and queues as cylinders. Code is a plain rectangle. At the context level, the system is the highest-contrast box: solid dark in light mode, light in dark mode.
+- **Few words.** Label every line that crosses a container or system boundary, or whose meaning isn't obvious. A plain call down a layered stack inside a container may go unlabelled, since the layering already says "calls". Write each label on a single line along the line, in about 3–5 words. Leave out `[type: tech]` tags. Put the tech in the name or the description instead.
+- **One zoom level per figure.** Give each figure a large uppercase title (CONTEXT, CONTAINER, COMPONENT), plenty of white space, and a size that fits one screen. Use grayscale only. Keep the text beside each figure to a caption, since the diagrams are the content.
+- **Legend: at most two items**, and only for something the code really has. The usual case is interface vs implementation, drawn as one small notch at the callee end of each internal dependency line: hollow if the caller depends on an interface, filled if on a concrete type. Without a real reason for one, leave the legend out.
+
+Before finishing, check each figure: no overlapping labels, no crossing lines, each figure fits one screen, every box is labelled, and so is every line that crosses a boundary or isn't obvious.
 
 ## How it's built
 
 - **One static file.** All CSS goes inline. Diagrams are inline SVG that you write by hand. Use no JavaScript, no CDN or other network dependency, and no external fonts or images, so the page opens offline, renders the same way for everyone, and diffs readably.
-- **Readable in both themes** — define colors as CSS custom properties and switch them with `prefers-color-scheme`. Use high contrast and enough spacing that labels never overlap.
+- **Readable in both themes** — define colors as CSS custom properties and switch them with `prefers-color-scheme`. Keep the grayscale contrast high in both themes.
 - **Agent-agnostic** — the output is a plain local file. Don't depend on any agent-specific publishing or rendering tool.
 - **Interactive only on request.** Add interactivity (click-to-expand modules, flow switching, JS) only when a human explicitly asks for it.
 
@@ -44,4 +60,4 @@ Keep the same altitude as the codebase map: leave out function signatures, line 
 
 ## Keep it honest
 
-Its value is being quick to take in. Every shape, line, and label should explain itself: name things directly on the diagram rather than encoding meaning in colors, line styles, or symbols. Label each box C4-style with its name, a `[type: tech]` tag (e.g. `[Container: Go]`, `[Database: Postgres]`), and a one-line responsibility. Label each arrow with what flows across it. If a diagram needs a legend at all, it's too detailed; cut it back to structure. Send the reader to the code for specifics.
+Its value is being quick to take in. Every shape, line, and label should explain itself. If a diagram needs more than the two-item legend, or more than a few words on a line, it's too detailed: cut it back to structure and send the reader to the code for specifics.
