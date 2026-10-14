@@ -16,7 +16,7 @@ A suite of AI skills for agentic software engineering — a repeatable, comprehe
 - **Quality is a gate, not a hope.** Every change must clear two co-equal gates — simplicity, readability, and extensibility on one side; validation and testing on the other — with correctness winning ties. "Done" means well-built *and* validated. Some skills deliberately reference other skills, so the pipeline doesn't rely on arbitrary or automatic skill invocation.
 - **Evidence over claims.** Nothing is reported done on an unverified claim; gates and runtime checks produce evidence a reviewer can trust without re-running it.
 - **Process proportional to stakes.** `triage` scales rigor to a change's reversibility and blast radius — a light path for trivial changes, the full pipeline for consequential ones.
-- **Human-in-the-loop where it matters.** Agents run autonomously through the middle; your attention is reserved for the two decisions that need it — signing off the plan on a risky change, and the final merge. That's the default; when you want to stay at the helm throughout, `first-mate` mode layers continuous, stage-by-stage check-ins over the whole pipeline without lowering any gate.
+- **Human-in-the-loop where it matters.** Agents run autonomously through the middle; your attention is reserved for the two decisions that need it — signing off the plan on a risky change, and the final merge. That's the default; when you want to stay at the helm throughout, `first-mate` mode layers continuous, stage-by-stage check-ins over the whole pipeline — across parallel tasks, each in its own worktree — without lowering any gate.
 - **Minimal hot path.** Anything auto-loaded into every agent (`CLAUDE.md`/`AGENTS.md`) stays tiny; heavy content lives in skills that load on demand (progressive disclosure).
 - **A persistent, high-level codebase map** lets agents orient from a durable doc instead of re-deriving the layout on each run — saving time and tokens — with an update-on-structural-change plus fix-on-read discipline so it stays honest.
 - **Token-lean authoring.** Skill text is intentionally somewhat concise without losing intent, and structured data is written in TOON rather than JSON to cut tokens losslessly.
@@ -60,7 +60,7 @@ The `workflow` skill is the conductor — after you give a task, it runs every s
 
 *Outside this sequence: the always-loaded `AGENTS.md` system prompt, and the `toon` syntax reference, pulled in whenever structured data is written.*
 
-*First-mate mode (`first-mate`) is the opt-in inverse: engage it when you want to stay at the helm the whole way, and the agent pairs with you at every stage instead of just the two ends.*
+*First-mate mode (`first-mate`) is the opt-in inverse: engage it when you want to stay at the helm the whole way, and the agent pairs with you at every stage instead of just the two ends, even across several parallel tasks.*
 
 ## Proof of concept
 
@@ -93,7 +93,7 @@ AGENTS.md                    Agent-agnostic system prompt (the entrypoint every 
 skills/
 ├── engineering-standards/   The code-quality constitution (Gate A + Gate B).
 ├── workflow/                Conductor → sequences the skills below into one tier-proportional pipeline.
-├── first-mate/              Opt-in collaboration mode → human as captain, agent as first mate; pairs across the whole pipeline.
+├── first-mate/              Opt-in collaboration mode → human as captain, agent as first mate; pairs across the pipeline, parallel tasks in worktrees.
 ├── triage/                  Reversibility/blast-radius classifier → autonomy lane + rigor tier.
 ├── planning/                Thorough plan interrogation (decision tree, one question at a time).
 ├── planning-lite/           Quick plan with minimal human interruption.
@@ -104,7 +104,7 @@ skills/
 ├── git-safety/              Operational git safety → secret hygiene, safe operations, correct routing.
 ├── frontend-practices/      Engineering-robustness standards for UI (responsive, overflow, states, a11y).
 ├── codebase-map/            Persistent high-level project map → orient fast, update on structural change.
-├── codebase-diagram/        Static HTML C4-style architecture + component diagrams beside the map → kept current only once it exists.
+├── codebase-diagram/        Static HTML C4 views (context/container/component + optional data, blueprint, flow, module map) beside the map; reference.svg sets the look.
 ├── orient/                  Human-facing orientation briefing → progressive tour of an unfamiliar codebase, read-only.
 └── toon/                    TOON syntax reference (cold-loaded) for the AGENTS.md TOON directive.
 ```

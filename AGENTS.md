@@ -4,6 +4,8 @@ Do not add yourself as a co-author or include Co-Authored-By trailers in git com
 
 Prefer TOON (Token-Oriented Object Notation) over JSON for structured data wherever applicable — it encodes the same data losslessly in fewer tokens.
 
+Give the shortest reply that does the job: lead with the answer or decision, prefer short bullets over paragraphs, and don't recap what the human already knows or your own process.
+
 A project's context lives in `AGENTS.md` at its repo root (with `CLAUDE.md` as a compatibility symlink). Read it before working in a project; when creating project context docs, make `AGENTS.md` canonical and symlink `CLAUDE.md` to it.
 
 Keep a high-level codebase map (the `codebase-map` skill) that the project's `AGENTS.md` points to; read it to orient before working, and update it when a change alters the project's structure.
