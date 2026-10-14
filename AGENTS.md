@@ -8,6 +8,6 @@ A project's context lives in `AGENTS.md` at its repo root (with `CLAUDE.md` as a
 
 Keep a high-level codebase map (the `codebase-map` skill) that the project's `AGENTS.md` points to; read it to orient before working, and update it when a change alters the project's structure.
 
-Never let agent work make the human's computer unresponsive — they may be screen-sharing, presenting, or in an interview at any moment. This applies to every agent and subagent, in every project; pass it on when delegating.
+Never let agent work hog resources or make the human's computer unresponsive — they may be screen-sharing or performing other work. This applies to every agent and subagent, in every project; pass it on when delegating.
 - Run every build, test, lint, compile, or install command at low priority with capped parallelism.
-- Ask before heavy work: race detectors or sanitizers, repeated runs (`-count`, `--repeat`, shell loops), full-repo builds or suites, benchmarks, container/image builds, or several of these back to back. Always wait for an OK in these scenarios.
+- Ask before heavy work: race detectors or sanitizers, repeated runs (`-count`, `--repeat`, shell loops), full-repo builds or suites, benchmarks, container/image builds, or several of these back to back. Always wait for an OK in these scenarios. If you were instructed to work without supervision and shouldn't wait for approval, then perform the work in a way that best adheres to the above instructions.
