@@ -41,7 +41,7 @@ The goal is a diagram the reader understands from its shape before reading a wor
 - **Shapes carry meaning.** Draw people as a person figure and datastores, caches, and queues as cylinders. Code is a plain rectangle. At the context level, the system is the highest-contrast box: solid dark in light mode, light in dark mode.
 - **Few words.** Label every line that crosses a container or system boundary, or whose meaning isn't obvious. A plain call down a layered stack inside a container may go unlabelled, since the layering already says "calls". Write each label on a single line along the line, in about 3–5 words. Leave out `[type: tech]` tags. Put the tech in the name or the description instead.
 - **One zoom level per figure.** Give each figure a large uppercase title (CONTEXT, CONTAINER, COMPONENT), plenty of white space, and a size that fits one screen. Use grayscale only. Keep the text beside each figure to a caption, since the diagrams are the content.
-- **Legend: at most two items**, and only for something the code really has. The usual case is interface vs implementation, drawn as one small notch at the callee end of each internal dependency line: hollow if the caller depends on an interface, filled if on a concrete type. Without a real reason for one, leave the legend out.
+- **Legend: minimal**, and only for things the code really has. More than 4 items means the diagram should be redesigned or split. The usual case is interface vs implementation, drawn as one small notch at the callee end of each internal dependency line: hollow if the caller depends on an interface, filled if on a concrete type. Without a real reason for one, leave the legend out.
 
 Before finishing, check each figure: no overlapping labels, no crossing lines, each figure fits one screen, every box is labelled, and so is every line that crosses a boundary or isn't obvious.
 
@@ -60,4 +60,4 @@ Before finishing, check each figure: no overlapping labels, no crossing lines, e
 
 ## Keep it honest
 
-Its value is being quick to take in. Every shape, line, and label should explain itself. If a diagram needs more than the two-item legend, or more than a few words on a line, it's too detailed: cut it back to structure and send the reader to the code for specifics.
+Its value is being quick to take in. Every shape, line, and label should explain itself. If a diagram needs more than a 4-item legend, or more than a few words on a line, it's too detailed: cut it back to structure and send the reader to the code for specifics.
