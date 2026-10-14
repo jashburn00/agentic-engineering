@@ -28,6 +28,8 @@ By default, orient for general understanding. If the human names a goal ("I need
 
 Read `docs/codebase-map.md` (or the project's architecture doc) if it exists, and use it to orient faster — applying fix-on-read if you find it stale. If no map exists, or it is stale, offer to create or refresh it per `codebase-map` (structured parts in `toon`) — but never write it without the human's go-ahead; orienting must leave an unfamiliar repo untouched by default.
 
+After the overview, offer once to produce a visual architecture page per `codebase-diagram`. Write it only if the human accepts.
+
 ## Keep it honest
 
 Orientation is a hint that speeds navigation, not a substitute for reading the code. Pitch it high-level and send the human to the code for specifics.

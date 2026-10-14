@@ -31,6 +31,7 @@ Read the map to orient before planning or implementing in a project you don't al
 ## When to update it
 
 - **At land, when the change altered structure** — a new module, a moved boundary, a changed entry point, a new placement convention. Update the map as part of the change so it lands in the same PR. A change that doesn't touch structure (a bug fix, a typo, an internal tweak) needs no map update.
+- **Companion diagram** — if a `codebase-diagram` page exists beside the map, update it alongside the map. If it doesn't exist, skip it.
 - **Fix-on-read** — whenever you read the map and find it wrong or stale, correct it then; if the fix is out of scope, flag the drift. A map that lies is worse than none, so keeping it honest is part of every task that touches it.
 
 ## Bootstrapping
