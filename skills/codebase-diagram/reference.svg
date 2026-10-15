@@ -1,9 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 690" role="img" aria-label="Style reference: a context diagram and a component diagram for a generic search engine">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 820" role="img" aria-label="Style reference: a context diagram and a component diagram for a generic search engine">
   <!--
     Style reference for the codebase-diagram skill. The system shown is made up; copy the look, not the content.
     Context: names only, the system as a solid dark box, short verb labels.
-    Component: components nested inside their container, layered top to bottom by call direction,
-    a dotted logical group, cylinders for datastores, notches for interface vs concrete, a two-item legend.
+    Component: components nested inside their container, named by exact code identifier, one row per layer
+    (entry points, services, data access, storage at the bottom), calls only downward,
+    a dotted logical group, cylinders for datastores, notches for interface vs concrete,
+    an arrowhead on each notch whose dependency is a constructor parameter (the router builds its handler itself, so that notch stays plain),
+    and a three-item legend.
   -->
   <style>
     svg { --bg: #ffffff; --ink: #1a1a1a; --muted: #5c5c5c; --line: #333333; --box: #ffffff;
@@ -34,6 +37,7 @@
     .iface { fill: var(--box); stroke: var(--line); stroke-width: 1.2; }
     .impl { fill: var(--line); stroke: var(--line); stroke-width: 1.2; }
     .head { fill: var(--line); }
+    .inj { fill: var(--line); }
   </style>
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
@@ -41,7 +45,7 @@
     </marker>
   </defs>
 
-  <rect class="bg" x="0" y="0" width="1000" height="690"/>
+  <rect class="bg" x="0" y="0" width="1000" height="820"/>
 
   <!-- ===== CONTEXT ===== -->
   <text class="title" x="160" y="40" text-anchor="middle">CONTEXT</text>
@@ -63,39 +67,43 @@
   <rect class="ext" x="110" y="440" width="170" height="50"/>
   <text class="name" x="195" y="470" text-anchor="middle">Email service</text>
 
-  <line class="divider" x1="315" y1="20" x2="315" y2="670"/>
+  <line class="divider" x1="315" y1="20" x2="315" y2="800"/>
 
   <!-- ===== COMPONENT ===== -->
   <text class="title" x="600" y="40" text-anchor="middle">COMPONENT</text>
 
-  <!-- legend: two items, only because the code has interfaces -->
-  <rect class="group" x="830" y="55" width="150" height="64"/>
-  <rect class="iface" x="842" y="74" width="14" height="8"/>
-  <text class="lbl" x="864" y="82">= interface</text>
-  <rect class="impl" x="842" y="98" width="14" height="8"/>
-  <text class="lbl" x="864" y="106">= concrete type</text>
+  <!-- legend: three items, only because the code has interfaces and injection -->
+  <rect class="group" x="830" y="52" width="150" height="80"/>
+  <rect class="iface" x="842" y="67" width="14" height="8"/>
+  <text class="lbl" x="864" y="75">= interface</text>
+  <rect class="impl" x="842" y="89" width="14" height="8"/>
+  <text class="lbl" x="864" y="97">= concrete type</text>
+  <path class="inj" d="M843,119 L849,110 L855,119 z"/>
+  <text class="lbl" x="864" y="119">= injected</text>
 
   <!-- external caller, outside the boundary -->
   <rect class="ext" x="520" y="60" width="160" height="44"/>
   <text class="name" x="600" y="87" text-anchor="middle">Client app</text>
 
   <!-- system boundary and the container, shaded -->
-  <rect class="boundary" x="340" y="140" width="650" height="530"/>
-  <text class="note" x="978" y="663" text-anchor="end">Search engine</text>
+  <rect class="boundary" x="340" y="140" width="440" height="660"/>
+  <text class="note" x="768" y="793" text-anchor="end">Search engine</text>
   <rect class="shade" x="360" y="165" width="400" height="480"/>
   <text class="cname" x="380" y="192">API service (Go)</text>
 
   <path class="wire" d="M600,104 L600,208" marker-end="url(#arrow)"/>
   <text class="lbl" x="610" y="126">search requests</text>
 
-  <!-- layers, top to bottom by call direction -->
+  <!-- rows are layers: entry points, services, data access; storage below -->
   <rect class="box" x="390" y="210" width="340" height="46"/>
-  <text class="name" x="560" y="238" text-anchor="middle">Router layer (Gin)</text>
+  <text class="name" x="560" y="231" text-anchor="middle">api.NewRouter</text>
+  <text class="desc" x="560" y="248" text-anchor="middle">Gin routes</text>
 
   <path class="wire" d="M560,256 L560,300"/>
   <rect class="box" x="390" y="300" width="340" height="46"/>
   <rect class="impl" x="553" y="296" width="14" height="8"/>
-  <text class="name" x="560" y="328" text-anchor="middle">Handler layer</text>
+  <text class="name" x="560" y="321" text-anchor="middle">api.*Handler ×3</text>
+  <text class="desc" x="560" y="338" text-anchor="middle">HTTP handlers</text>
 
   <rect class="group" x="380" y="385" width="360" height="120"/>
   <text class="note" x="560" y="402" text-anchor="middle">Service layer</text>
@@ -103,33 +111,37 @@
   <path class="wire" d="M475,346 L475,415"/>
   <rect class="box" x="395" y="415" width="160" height="70"/>
   <rect class="iface" x="468" y="411" width="14" height="8"/>
-  <text class="name" x="475" y="445" text-anchor="middle">Search service</text>
+  <path class="inj" d="M469,409 L475,400 L481,409 z"/>
+  <text class="name" x="475" y="445" text-anchor="middle">search.Service</text>
   <text class="desc" x="475" y="465" text-anchor="middle">full + instant search</text>
 
   <path class="wire" d="M645,346 L645,415"/>
   <rect class="box" x="565" y="415" width="160" height="70"/>
   <rect class="iface" x="638" y="411" width="14" height="8"/>
-  <text class="name" x="645" y="445" text-anchor="middle">Sanitize service</text>
+  <path class="inj" d="M639,409 L645,400 L651,409 z"/>
+  <text class="name" x="645" y="445" text-anchor="middle">sanitize.Service</text>
   <text class="desc" x="645" y="465" text-anchor="middle">cleans query input</text>
 
   <path class="wire" d="M475,485 L475,560"/>
   <rect class="box" x="390" y="560" width="340" height="60"/>
   <rect class="iface" x="468" y="556" width="14" height="8"/>
-  <text class="name" x="560" y="585" text-anchor="middle">Repository</text>
+  <path class="inj" d="M469,554 L475,545 L481,554 z"/>
+  <text class="name" x="560" y="585" text-anchor="middle">store.Repository</text>
   <text class="desc" x="560" y="605" text-anchor="middle">read-through: cache, then database</text>
+  <text class="note" x="560" y="637" text-anchor="middle">injected deps wired in main.go</text>
 
-  <!-- datastores as cylinders, right of the container -->
-  <path class="wire" d="M730,575 L785,575 L785,445 L820,445"/>
-  <text class="lbl" x="779" y="510" text-anchor="middle" transform="rotate(-90 779 510)">check first</text>
-  <path class="db" d="M820,400 L820,476 A80,14 0 0 0 980,476 L980,400"/>
-  <ellipse class="db" cx="900" cy="400" rx="80" ry="14"/>
-  <text class="name" x="900" y="440" text-anchor="middle">Cache (Redis)</text>
-  <text class="desc" x="900" y="460" text-anchor="middle">search results</text>
+  <!-- datastores as cylinders, in the bottom row, outside the container -->
+  <path class="wire" d="M450,620 L450,686"/>
+  <text class="lbl" x="458" y="670">check first</text>
+  <path class="db" d="M370,700 L370,760 A80,14 0 0 0 530,760 L530,700"/>
+  <ellipse class="db" cx="450" cy="700" rx="80" ry="14"/>
+  <text class="name" x="450" y="738" text-anchor="middle">Cache (Redis)</text>
+  <text class="desc" x="450" y="756" text-anchor="middle">search results</text>
 
-  <path class="wire" d="M730,605 L820,605"/>
-  <text class="lbl" x="790" y="621" text-anchor="middle">on miss</text>
-  <path class="db" d="M820,560 L820,636 A80,14 0 0 0 980,636 L980,560"/>
-  <ellipse class="db" cx="900" cy="560" rx="80" ry="14"/>
-  <text class="name" x="900" y="600" text-anchor="middle">Database (Postgres)</text>
-  <text class="desc" x="900" y="620" text-anchor="middle">sites, users</text>
+  <path class="wire" d="M670,620 L670,686"/>
+  <text class="lbl" x="678" y="670">on miss</text>
+  <path class="db" d="M590,700 L590,760 A80,14 0 0 0 750,760 L750,700"/>
+  <ellipse class="db" cx="670" cy="700" rx="80" ry="14"/>
+  <text class="name" x="670" y="738" text-anchor="middle">Database (Postgres)</text>
+  <text class="desc" x="670" y="756" text-anchor="middle">sites, users</text>
 </svg>
