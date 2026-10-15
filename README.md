@@ -59,6 +59,8 @@ The `workflow` skill is the conductor — after you give a task, it runs every s
 
 *First-mate mode (`first-mate`) is the opt-in inverse: engage it when you want to stay at the helm the whole way, and the agent pairs with you at every stage instead of just the two ends, from triage through landing.*
 
+*To run many tasks at once across projects, `admiral` sends each to its project's workflow in its own worktree and keeps one board; any task can pair through `first-mate`.*
+
 ## Proof of concept
 
 A real end-to-end run of the pipeline during its early stages. Given only a bug report about a login screen that overflowed the viewport on a cold start, a lead agent ran the whole workflow by dispatching specialized subagents to triage, implement, validate, verify, and land the change, then synthesizing their results. It delivered on the primary goal: minimal human attention — the human was pulled in only for the final merge — for maximum quality output.
@@ -88,21 +90,25 @@ The artifacts this run left behind mirror the safety and quality checks the work
 ```
 AGENTS.md                    Agent-agnostic system prompt (the entrypoint every agent reads).
 skills/
-├── engineering-standards/   The code-quality constitution (Gate A + Gate B).
+│  Fleet
+├── admiral/                 Cross-project orchestrator → one interface sending tasks to many projects' workflows; registry + live board.
+│  Task
 ├── workflow/                Conductor → sequences the skills below into one tier-proportional pipeline; plan-template.md sets each task's plan.
 ├── first-mate/              Opt-in collaboration mode → human as captain, agent as first mate; pairs on one task, stage by stage, across the pipeline.
 ├── triage/                  Reversibility/blast-radius classifier → autonomy lane + rigor tier.
 ├── planning/                Thorough plan interrogation (decision tree, one question at a time).
 ├── planning-lite/           Quick plan with minimal human interruption.
+├── codebase-map/            Persistent high-level project map → orient fast, update on structural change.
+├── codebase-diagram/        Static HTML C4 views (context/container/component + optional data, blueprint, flow, module map) beside the map; reference.svg sets the look.
+├── orient/                  Human-facing orientation briefing → progressive tour of an unfamiliar codebase, read-only.
+├── git-safety/              Operational git safety → secret hygiene, safe operations, correct routing.
+├── engineering-standards/   The code-quality constitution (Gate A + Gate B).
+├── frontend-practices/      Engineering-robustness standards for UI (responsive, overflow, states, a11y).
+│  Lenses / reference
 ├── validate/                Standalone validation pipeline → findings + pass/blocked verdict.
 ├── review/                  Code-review judgment lens → correctness/quality findings + verdict.
 ├── security-review/         Application-security lens → vulnerability findings + severity + remediation.
 ├── verify/                  Runtime-observation lens → run the change, observe, report with evidence.
-├── git-safety/              Operational git safety → secret hygiene, safe operations, correct routing.
-├── frontend-practices/      Engineering-robustness standards for UI (responsive, overflow, states, a11y).
-├── codebase-map/            Persistent high-level project map → orient fast, update on structural change.
-├── codebase-diagram/        Static HTML C4 views (context/container/component + optional data, blueprint, flow, module map) beside the map; reference.svg sets the look.
-├── orient/                  Human-facing orientation briefing → progressive tour of an unfamiliar codebase, read-only.
 └── toon/                    TOON syntax reference (cold-loaded) for the AGENTS.md TOON directive.
 ```
 
