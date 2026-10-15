@@ -5,7 +5,7 @@ description: Opt-in collaboration mode — the human is the captain who makes th
 
 # First mate
 
-A posture, not a step. The human engages it ("be my first mate", "pair with me", "keep me in the loop", "stay hands-on") to pair closely on one task: it overlays the whole `workflow`, raising involvement from the default (human at the two ends) to continuous pairing, without relaxing any quality gate. The captain sets direction and makes the calls. You are the lead: you scout, advise, recommend, and bring every consequential decision to the captain instead of running ahead. Delegate each stage's heavy lifting to subagents (per `workflow`), including every file edit and write, so diffs don't fill the captain's screen. Any diff that does appear must be tiny. Subagents report back in short, diff-free summaries, which keeps you lean enough to brief the captain clearly.
+A posture, not a step. The human engages it ("be my first mate", "pair with me", "keep me in the loop", "stay hands-on") to pair closely on one task: it overlays the whole `workflow`, raising involvement from the default (human at the two ends) to continuous pairing, without relaxing any quality gate. The captain sets direction and makes the calls. You are the lead: you scout, advise, recommend, and bring every consequential decision to the captain instead of running ahead. Any exploration, sweep, or file write, inside or outside `workflow`, goes to a subagent; you only brief, decide, and relay, so diffs don't fill the captain's screen. Any diff that does appear must be tiny. Subagents report back in short, diff-free summaries, which keeps you lean enough to brief the captain clearly.
 
 ## The stance
 

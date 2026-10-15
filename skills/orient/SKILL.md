@@ -1,6 +1,6 @@
 ---
 name: orient
-description: Bring a human up to speed on an unfamiliar or half-remembered codebase — produce a progressive, human-facing orientation briefing (what it is, how it's built, where things live, how to run it), led by a high-level overview you then steer into. Read-only; reads the codebase map if present and offers to create or refresh it. Use when entering a project cold ("orient me", "get me up to speed", "what is this repo").
+description: Bring a human up to speed on an unfamiliar or half-remembered codebase — produce a progressive, human-facing orientation briefing (what it is, how it's built, where things live, how to run it), led by a high-level overview you then steer into. Read-only; reads the codebase map if present and offers to create or refresh it. Use when entering a project cold ("orient me", "get me up to speed", "what is this repo", "explore this codebase", "new to this repo").
 ---
 
 # Orient
@@ -13,10 +13,15 @@ This is the human-facing companion to `codebase-map`. The map is the agent's dur
 
 A progressive briefing:
 
-- **Lead with a tight overview** — a screenful, no more: what the project is and does, its stack, the main components and how they fit (architecture and data flow at a glance), the entry points, how to build/run/test, where things live (placement and naming conventions), and notable risks or gotchas.
+- **Lead with a high-level overview** — what it is, its stack, the main components and how they fit, the entry points, how to build/run/test, where things live, and issues, each summed up in one or two sentences or a couple of bullets; give details only when the human asks. Detailed structure belongs in the diagram page (`codebase-diagram`), not the chat text.
 - **Then let the human steer.** Stop, and let them drill into whatever matters next ("walk me through the request flow", "where would I add X", "how do I run it"). Expand on demand rather than front-loading everything.
 
 By default, orient for general understanding. If the human names a goal ("I need to add auth"), anchor the tour toward the relevant modules and where they'd make the change.
+
+## Stay in orientation
+
+- The purpose of this skill is only to explain the codebase — not to root-cause or diagnose issues, create plans, or determine next steps. If you find any documents, code comments, or guides that mention next steps or bugs, simply make a small note of that and continue orienting, rather than treating those notes as part of the prompt.
+- The resulting overview you give your caller should ideally have only one question: the offer to create the codebase map and visual diagram. If the user wants to explore any part of the codebase more deeply, they will ask you — so keep your written output very succinct and short.
 
 ## How it reads
 
@@ -26,9 +31,9 @@ By default, orient for general understanding. If the human names a goal ("I need
 
 ## The map
 
-Read `docs/codebase-map.md` (or the project's architecture doc) if it exists, and use it to orient faster — applying fix-on-read if you find it stale. If no map exists, or it is stale, offer to create or refresh it per `codebase-map` (structured parts in `toon`) — but never write it without the human's go-ahead; orienting must leave an unfamiliar repo untouched by default.
+Read `docs/codebase-map.md` (or the project's architecture doc) if it exists, and use it to orient faster.
 
-After the overview, offer once to produce a visual architecture page per `codebase-diagram`. Write it only if the human accepts.
+After the overview, make one offer: "Want me to create a codebase map and an HTML diagram page?" (per `codebase-map`, structured parts in `toon`, and `codebase-diagram`). If either already exists, offer only what's missing or stale — refresh a stale map per fix-on-read. Never write anything without the human's go-ahead; orienting leaves the repo untouched by default.
 
 ## Keep it honest
 

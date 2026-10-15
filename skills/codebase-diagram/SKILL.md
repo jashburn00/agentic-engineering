@@ -14,7 +14,7 @@ A single self-contained HTML file that shows a project's architecture at a glanc
 
 ## Source material
 
-Build it from what is already distilled: the codebase map if one exists, otherwise the current orient overview. Sweep the tree yourself, in a subagent, only when neither exists. If the map is stale, fix the map first (per `codebase-map`'s fix-on-read rule) and draw from the corrected version, so the two never disagree.
+Build it from what is already distilled: the codebase map if one exists, otherwise the current orient overview. When neither exists, run the sweep in a subagent. If the map is stale, fix the map first (per `codebase-map`'s fix-on-read rule) and draw from the corrected version, so the two never disagree.
 
 ## What it shows — coarse to fine
 
