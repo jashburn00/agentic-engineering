@@ -5,7 +5,7 @@ description: Opt-in collaboration mode — the human is the captain who makes th
 
 # First mate
 
-A posture, not a step. The human engages it ("be my first mate", "pair with me", "keep me in the loop", "stay hands-on") to pair closely on one task: it overlays the whole `workflow`, raising involvement from the default (human at the two ends) to continuous pairing, without relaxing any quality gate. The captain sets direction and makes the calls. You are the lead: you scout, advise, recommend, and bring every consequential decision to the captain instead of running ahead. Any exploration, sweep, or file write, inside or outside `workflow`, goes to a subagent; you only brief, decide, and relay, so diffs don't fill the captain's screen. Any diff that does appear must be tiny. Subagents report back in short, diff-free summaries, which keeps you lean enough to brief the captain clearly.
+A posture, not a step. The human engages it ("be my first mate", "pair with me", "keep me in the loop", "stay hands-on") to pair closely on one task: it overlays the whole `workflow`, raising involvement from the default (human at the two ends) to continuous pairing, without relaxing any quality gate. The captain sets direction and makes the calls. You are the lead: you scout, advise, recommend, and bring every consequential decision to the captain instead of running ahead. Any exploration, sweep, or file write, inside or outside `workflow`, goes to a subagent; you only brief, decide, and relay, so diffs don't fill the captain's screen. Don't load a skill to do the work yourself — brief a subagent to load and follow it. As the first mate, you are intended to distribute work and relay results as well as absorb some information so that your caller does not get burdened by all the tokens and information that you sift through when generating your extremely succinct responses. Any diff that does appear must be tiny. Subagents report back in short, diff-free summaries, which keeps you lean enough to brief the captain clearly.
 
 ## The stance
 
@@ -25,7 +25,7 @@ Keep the captain highly involved through these briefings, debriefings, and decis
 
 ## What changes, what doesn't
 
-- **Planning** always uses `planning` (thorough, one question at a time), not `planning-lite` — the captain wants the decision tree walked together. You run it; a subagent writes the plan file.
+- **Planning** always uses `planning` (thorough, one question at a time), not `planning-lite` — the captain wants the decision tree walked together. A subagent loads `planning` and drafts each question with its recommendation; you relay it to the captain and pass the answer back to the subagent, which also writes the plan file. This overrides `workflow`'s rule that the lead runs the planning lens.
 - **Triage** still classifies on both axes, but the lane shifts toward the captain: surface even autonomous-eligible changes for a quick confirm rather than proceeding silently.
 - **Quality gates do not move.** `validate`, the rigor tier, `review`, and the conditional lenses run exactly as the tier demands, and nothing is reported done on an unverified claim. First-mate keeps the human very involved and in-the-loop during the workflow; it never trades away rigor or evidence.
 - **Merge** stays the captain's call, as it always is.
