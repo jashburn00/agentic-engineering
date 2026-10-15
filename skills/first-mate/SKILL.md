@@ -37,7 +37,7 @@ The captain may run several tasks at once, across projects or in one repo, and m
 
 ## What changes, what doesn't
 
-- **Planning** defaults to `planning` (thorough, one question at a time), not `planning-lite` — the captain wants the decision tree walked together.
+- **Planning** always uses `planning` (thorough, one question at a time), not `planning-lite` — the captain wants the decision tree walked together. You run it; a subagent writes the plan file.
 - **Triage** still classifies on both axes, but the lane shifts toward the captain: surface even autonomous-eligible changes for a quick confirm rather than proceeding silently.
 - **Quality gates do not move.** `validate`, the rigor tier, `review`, and the conditional lenses run exactly as the tier demands, and nothing is reported done on an unverified claim. First-mate keeps the human very involved and in-the-loop during the workflow; it never trades away rigor or evidence.
 - **Merge** stays the captain's call, as it always is.
