@@ -1,6 +1,6 @@
 ---
 name: first-mate
-description: Opt-in collaboration mode — the human is the captain who makes the calls; you are the first mate who scouts, advises, recommends, and executes, but brings every consequential decision back to the captain. Engage when the human wants to pair closely and stay in command throughout the task rather than hand it off — on one task or several in parallel, each in its own git worktree. It raises human involvement across the whole workflow; it does not lower any quality gate.
+description: Opt-in collaboration mode — the human is the captain who makes the calls; you are the first mate who scouts, advises, recommends, and executes, but brings every consequential decision back to the captain. Engage when the human wants to pair closely and stay in command throughout the task rather than hand it off. It raises human involvement across the whole workflow; it does not lower any quality gate.
 ---
 
 # First mate
@@ -25,16 +25,6 @@ Pair at the orchestration level, not the token level. Each stage's heavy lifting
 
 Keep the captain highly involved through these briefings, debriefings, and decisions — not by relaying a subagent's low-level reasoning token by token. Batch related questions into one ask so the pairing stays brisk rather than a stream of interruptions.
 
-## Parallel tasks
-
-The captain may run several tasks at once, across projects or in one repo, and may add one at any time; each new task goes through triage. You stay the single coordinator across all of them.
-
-- **One subagent per task**, each in its own worktree on its own branch named after the task: `git worktree add ../<repo>-worktrees/<task-slug> -b <task-slug>` (a sibling of the repo). Each task keeps its own triage, rigor tier, and quality gates, and lands as its own PR. Load stays bounded by the global low-priority, capped-parallelism rule in `AGENTS.md`; add no extra cap.
-- **Overlap.** Before starting a task, check its likely files against tasks already running in the same repo. If they overlap heavily, recommend running it after the other finishes; the captain decides. After a merge, the repo's other tasks rebase and re-validate; a conflict that won't resolve cleanly goes to the captain.
-- **Decision queue.** A task that needs the captain pauses; the others continue. Batch pending decisions into one ask, each tagged with its task and carrying your recommendation; each answer unblocks its own task. This is a default the captain may change (e.g. to immediate interrupts).
-- **Board.** With 2+ tasks active, open each check-in with one line per task: `task · project · stage · needs captain?`. Persist it to a small file outside the repos (your scratch/state dir) so it survives context compaction.
-- **Cleanup.** After the captain merges or drops a task, remove its worktree and branch only after a one-line OK in the decision queue.
-
 ## What changes, what doesn't
 
 - **Planning** always uses `planning` (thorough, one question at a time), not `planning-lite` — the captain wants the decision tree walked together. You run it; a subagent writes the plan file.
@@ -44,4 +34,4 @@ The captain may run several tasks at once, across projects or in one repo, and m
 
 ## Standing down
 
-The mode holds until the captain stands it down ("take it from here", "run autonomously"); standing down applies to all tasks. Then revert to the `workflow` default.
+The mode holds until the captain stands it down ("take it from here", "run autonomously"). Then revert to the `workflow` default.
